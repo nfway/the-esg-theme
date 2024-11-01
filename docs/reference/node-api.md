@@ -1,239 +1,239 @@
 # Node API
 
-Node API can be imported from `vuepress/core`.
+Node API 可以通过 `vuepress/core` 来引入。
 
 ## App
 
-The app instance is available in all hooks of [Plugin API](./plugin-api.md).
+[插件 API](./plugin-api.md) 的所有 Hooks 中都可以获取到 App 实例。
 
-The `BuildApp` and `DevApp` share almost the same properties and methods, except [build](#build) and [dev](#dev) method.
+`BuildApp` 和 `DevApp` 除了 [build](#build) 和 [dev](#dev) 方法外，拥有一样的属性和方法。
 
 ### createBuildApp
 
-- Signature:
+- 函数签名：
 
 ```ts
 const createBuildApp: (config: AppConfig) => BuildApp
 ```
 
-- Parameters:
+- 参数：
 
-| Parameter | Type        | Description                      |
-| --------- | ----------- | -------------------------------- |
-| config    | `AppConfig` | Config to create a VuePress app. |
+| 参数   | 类型        | 描述                       |
+| ------ | ----------- | -------------------------- |
+| config | `AppConfig` | 创建 VuePress App 的选项。 |
 
-- Details:
+- 详情：
 
-  Create a build mode app instance, which is used for building static files.
+  创建一个 Build 模式的 App 实例，用于构建静态文件。
 
-- Example:
+- 示例：
 
 ```ts
 const build = async () => {
   const app = createBuildApp({
-    // ...options
+    // ...配置项
   })
 
-  // initialize and prepare
+  // 初始化和准备
   await app.init()
   await app.prepare()
 
-  // build
+  // 构建
   await app.build()
 
-  // process onGenerated hook
+  // 处理 onGenerated hook
   await app.pluginApi.hooks.onGenerated.process(app)
 }
 ```
 
-- Also see:
-  - [Node API > App Methods > build](#build)
+- 参考：
+  - [Node API > App 方法 > build](#build)
 
 ### createDevApp
 
-- Signature:
+- 函数签名：
 
 ```ts
 const createDevApp: (config: AppConfig) => DevApp
 ```
 
-- Parameters:
+- 参数：
 
-| Parameter | Type        | Description                      |
-| --------- | ----------- | -------------------------------- |
-| config    | `AppConfig` | Config to create a VuePress app. |
+| 参数   | 类型        | 描述                       |
+| ------ | ----------- | -------------------------- |
+| config | `AppConfig` | 创建 VuePress App 的选项。 |
 
-- Details:
+- 详情：
 
-  Create a dev mode app instance, which is used for starting a dev server.
+  创建一个 Dev 模式的 App 实例，用于启动开发服务器。
 
-- Example:
+- 示例：
 
 ```ts
 const dev = async () => {
   const app = createDevApp({
-    // ...options
+    // ...配置项
   })
 
-  // initialize and prepare
+  // 初始化和准备
   await app.init()
   await app.prepare()
 
-  // start dev server
+  // 启动开发服务器
   const closeDevServer = await app.dev()
 
-  // set up file watchers
+  // 准备文件监听器
   const watchers = []
 
-  // restart dev server
+  // 重启开发服务器
   const restart = async () => {
     await Promise.all([
-      // close all watchers
+      // 关闭所有监听器
       ...watchers.map((item) => item.close()),
-      // close current dev server
+      // 关闭当前的开发服务器
       closeDevServer(),
     ])
     await dev()
   }
 
-  // process onWatched hook
+  // 处理 onWatched hook
   await app.pluginApi.hooks.onWatched.process(app, watchers, restart)
 }
 ```
 
-- Also see:
-  - [Node API > App Methods > dev](#dev)
+- 参考：
+  - [Node API > App 方法 > dev](#dev)
 
-## App Properties
+## App 属性
 
 ### options
 
-- Type: `AppOptions`
+- 类型： `AppOptions`
 
-- Details:
+- 详情：
 
-  Options of VuePress app.
+  VuePress App 的配置项。
 
-  The options come from the `config` argument in [createBuildApp](#createbuildapp) / [createDevApp](#createdevapp), while all optional fields will be filled with a default value.
+  这些配置项来自于 [createBuildApp](#createbuildapp) / [createDevApp](#createdevapp) 的 `config` 参数，但所有可选的字段都填充上了默认值。
 
 ### siteData
 
-- Type: `SiteData`
+- 类型： `SiteData`
 
-- Details:
+- 详情：
 
-  Site data that set by user, including all the [site config](./config.md#site-config), which will be used in client side.
+  由用户设置的站点数据，包含所有的 [站点配置](./config.md#站点配置) ，可以在客户端代码中使用。
 
 ### version
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Version of VuePress app, i.e. version of `@vuepress/core` package.
+  VuePress App 的版本，即 `@vuepress/core` 包的版本。
 
 ### env.isBuild
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Environment flag used to identify whether the app is running in build mode, i.e. whether a [BuildApp](#createbuildapp) instance.
+  用于判断 App 是否运行在 Build 模式的环境标记，即当前 App 是否是 [BuildApp](#createbuildapp) 实例。
 
 ### env.isDev
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Environment flag used to identify whether the app is running in dev mode, i.e. whether a [DevApp](#createdevapp) instance.
+  用于判断 App 是否运行在 Dev 模式的环境标记，即当前 App 是否是 [DevApp](#createdevapp) 实例。
 
 ### env.isDebug
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Environment flag used to identify whether the debug mode is enabled.
+  用于判断 App 是否开启 Debug 模式的环境标记。
 
 ### markdown
 
-- Type: `MarkdownIt`
+- 类型： `MarkdownIt`
 
-- Details:
+- 详情：
 
-  The [markdown-it](https://github.com/markdown-it/markdown-it) instance used for parsing markdown content.
+  用于解析 Markdown 内容的 [markdown-it](https://github.com/markdown-it/markdown-it) 实例。
 
-  It is only available in and after [onInitialized](./plugin-api.md#oninitialized) hook.
+  它仅在 [onInitialized](./plugin-api.md#oninitialized) 以及之后的 Hooks 中才可用。
 
 ### pages
 
-- Type: `Page[]`
+- 类型： `Page[]`
 
-- Details:
+- 详情：
 
-  The [Page](#page) object array.
+  [Page](#page) 对象数组。
 
-  It is only available in and after [onInitialized](./plugin-api.md#oninitialized) hook.
+  它仅在 [onInitialized](./plugin-api.md#oninitialized) 以及之后的 Hooks 中才可用。
 
-## App Methods
+## App 方法
 
 ### dir
 
-- Utils:
+- 工具函数：
 
-  - `dir.cache()`: resolve to cache directory
-  - `dir.temp()`: resolve to temp directory
-  - `dir.source()`: resolve to source directory
-  - `dir.dest()`: resolve to dest directory
-  - `dir.client()`: resolve to `@vuepress/client` directory
-  - `dir.public()`: resolve to public directory
+  - `dir.cache()`： 解析至缓存目录
+  - `dir.temp()`： 解析至临时文件目录
+  - `dir.source()`： 解析至源文件目录
+  - `dir.dest()`： 解析至输出目录
+  - `dir.client()`： 解析至 `@vuepress/client` 目录
+  - `dir.public()`： 解析至 Public 文件目录
 
-- Signature:
+- 函数签名：
 
 ```ts
 type AppDirFunction = (...args: string[]) => string
 ```
 
-- Details:
+- 详情：
 
-  Utils to resolve the absolute file path in corresponding directory.
+  用于解析对应目录下的文件绝对路径的一些工具函数。
 
-  If you don't provide any arguments, it will return the absolute path of the directory.
+  如果你不传入任何参数，就会返回对应目录的绝对路径。
 
-- Example:
+- 示例：
 
 ```ts
-// resolve the absolute file path of the `${sourceDir}/README.md`
+// 解析 `${sourceDir}/README.md` 文件的绝对路径
 const homeSourceFile = app.dir.source('README.md')
 ```
 
 ### writeTemp
 
-- Signature:
+- 函数签名：
 
 ```ts
 declare const writeTemp = (file: string, content: string) => Promise<string>
 ```
 
-- Parameters:
+- 参数：
 
-| Parameter | Type     | Description                                                                     |
-| --------- | -------- | ------------------------------------------------------------------------------- |
-| file      | `string` | Filepath of the temp file that going to be written. Relative to temp directory. |
-| content   | `string` | Content of the temp file that going to be written.                              |
+| 参数    | 类型     | 描述                                         |
+| ------- | -------- | -------------------------------------------- |
+| file    | `string` | 要写入的临时文件的路径，相对于临时文件目录。 |
+| content | `string` | 要写入的临时文件路径的内容。                 |
 
-- Details:
+- 详情：
 
-  A method to write temp file.
+  用于写入临时文件的方法。
 
-  The written file could be imported via `@temp` alias in client files.
+  写入的文件可以在客户端文件中通过 `@temp` 别名来引入。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
-  // write temp file in onPrepared hook
+  // 在 onPrepared hook 中写入临时文件
   async onPrepared() {
     await app.writeTemp('foo.js', "export const foo = 'bar'")
   },
@@ -241,104 +241,102 @@ export default {
 ```
 
 ```ts
-// import temp file in client code
+// 在客户端文件中引入临时文件
 import { foo } from '@temp/foo'
 ```
 
 ### init
 
-- Signature:
+- 函数签名：
 
 ```ts
 declare const init = () => Promise<void>
 ```
 
-- Details:
+- 详情：
 
-  Initialize VuePress app.
+  初始化 VuePress App 。
 
-- Also see:
-  - [Advanced > Architecture > Core Process and Hooks](../advanced/architecture.md#core-process-and-hooks)
+- 参考：
+  - [深入 > 架构 > 核心流程与 Hooks](../advanced/architecture.md#核心流程与-hooks)
 
 ### prepare
 
-- Signature:
+- 函数签名：
 
 ```ts
 declare const prepare = () => Promise<void>
 ```
 
-- Details:
+- 详情：
 
-  Prepare client temp files.
+  准备客户端临时文件。
 
-- Also see:
-  - [Advanced > Architecture > Core Process and Hooks](../advanced/architecture.md#core-process-and-hooks)
+- 参考：
+  - [深入 > 架构 > 核心流程与 Hooks](../advanced/architecture.md#核心流程与-hooks)
 
 ### build
 
-- Signature:
+- 函数签名：
 
 ```ts
 declare const build = () => Promise<void>
 ```
 
-- Details:
+- 详情：
 
-  Generate static site files.
+  生成静态站点文件。
 
-  This method is only available in `BuildApp`.
+  该方法仅在 [BuildApp](#createbuildapp) 中可用。
 
-- Also see:
-  - [Node API > App > createBuildApp](#createbuildapp)
-  - [Advanced > Architecture > Core Process and Hooks](../advanced/architecture.md#core-process-and-hooks)
+- 参考：
+  - [深入 > 架构 > 核心流程与 Hooks](../advanced/architecture.md#核心流程与-hooks)
 
 ### dev
 
-- Signature:
+- 函数签名：
 
 ```ts
 declare const dev = () => Promise<() => Promise<void>>
 ```
 
-- Details:
+- 详情：
 
-  Start dev server.
+  启动开发服务器。
 
-  This method is only available in `DevApp`.
+  该方法仅在 [DevApp](#createdevapp) 中可用。
 
-- Also see:
-  - [Node API > App > createDevApp](#createdevapp)
-  - [Advanced > Architecture > Core Process and Hooks](../advanced/architecture.md#core-process-and-hooks)
+- 参考：
+  - [深入 > 架构 > 核心流程与 Hooks](../advanced/architecture.md#核心流程与-hooks)
 
 ## Page
 
 ### createPage
 
-- Signature:
+- 函数签名：
 
 ```ts
 const createPage: (app: App, options: PageOptions) => Promise<Page>
 ```
 
-- Parameters:
+- 参数：
 
-| Parameter | Type          | Description                      |
-| --------- | ------------- | -------------------------------- |
-| app       | `App`         | The VuePress app instance.       |
-| options   | `PageOptions` | Options to create VuePress page. |
+| 参数    | 类型          | 描述                        |
+| ------- | ------------- | --------------------------- |
+| app     | `App`         | VuePress App 实例。         |
+| options | `PageOptions` | 创建 VuePress Page 的选项。 |
 
-- Details:
+- 详情：
 
-  Create a VuePress page object.
+  创建一个 VuePress Page 对象。
 
-- Example:
+- 示例：
 
 ```ts
 import { createPage } from 'vuepress/core'
 
 export default {
-  // create an extra page in onInitialized hook
+  // 在 onInitialized hook 中创建一个额外页面
   async onInitialized(app) {
     app.pages.push(
       await createPage(app, {
@@ -347,9 +345,9 @@ export default {
           layout: 'Layout',
         },
         content: `\
-# Foo Page
+# 某个 Page
 
-Hello, world.
+你好，世界。
 `,
       }),
     )
@@ -357,65 +355,65 @@ Hello, world.
 }
 ```
 
-- Also see:
-  - [Node API > App Properties > pages](#pages)
-  - [Cookbook > Adding Extra Pages](../advanced/cookbook/adding-extra-pages.md)
+- 参考：
+  - [Node API > App 属性 > pages](#pages)
+  - [Cookbook > 添加额外页面](../advanced/cookbook/adding-extra-pages.md)
 
-## Page Properties
+## Page 属性
 
 ### path
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Route path of the page.
+  该 Page 的路由路径。
 
-- Also see:
-  - [Guide > Page > Routing](../guide/page.md#routing)
-  - [Node API > Page Properties > pathInferred](#pathinferred)
+- 参考：
+  - [指南 > 页面 > 路由](../guide/page.md#路由)
+  - [Node API > Page 属性 > pathInferred](#pathinferred)
 
 ### title
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Title of the page.
+  该 Page 的标题。
 
-- Also see:
+- 参考：
   - [Frontmatter > title](./frontmatter.md#title)
 
 ### lang
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Language of the page.
+  该 Page 的语言。
 
-- Example:
+- 示例：
 
   - `'en-US'`
   - `'zh-CN'`
 
-- Also see:
+- 参考：
   - [Frontmatter > lang](./frontmatter.md#title)
 
 ### frontmatter
 
-- Type: `PageFrontmatter`
+- 类型： `PageFrontmatter`
 
-- Details:
+- 详情：
 
-  Frontmatter of the page.
+  该 Page 的 Frontmatter 。
 
-- Also see:
+- 参考：
   - [Frontmatter](./frontmatter.md)
 
 ### headers
 
-- Type: `PageHeader[]`
+- 类型： `PageHeader[]`
 
 ```ts
 interface PageHeader {
@@ -426,16 +424,16 @@ interface PageHeader {
 }
 ```
 
-- Details:
+- 详情：
 
-  Headers of the page.
+  该 Page 的小标题。
 
-- Also see:
-  - [Config > markdown.headers](./config.md#markdown-headers)
+- 参考：
+  - [配置 > markdown.headers](./config.md#markdown-headers)
 
 ### data
 
-- Type: `PageData`
+- 类型： `PageData`
 
 ```ts
 interface PageData {
@@ -447,64 +445,64 @@ interface PageData {
 }
 ```
 
-- Details:
+- 详情：
 
-  Data of the page.
+  该 Page 的数据。
 
-  Page data would be available in client side.
+  Page 数据可以在客户端代码中使用。
 
-- Also see:
-  - [Client API > usePageData](./client-api.md#usepagedata)
-  - [Plugin API > extendsPage](./plugin-api.md#extendspage)
+- 参考：
+  - [客户端 API > usePageData](./client-api.md#usepagedata)
+  - [插件 API > extendsPage](./plugin-api.md#extendspage)
 
 ### content
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Raw content of the page.
+  该 Page 的未经渲染的原始内容。
 
 ### contentRendered
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Rendered content of the page.
+  该 Page 的渲染后的内容。
 
 ### date
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Date of the page, in 'yyyy-MM-dd' format.
+  该 Page 的日期，遵从 'yyyy-MM-dd' 格式。
 
-- Example:
+- 示例：
 
   - `'0000-00-00'`
   - `'2021-08-16`'
 
-- Also see:
+- 参考：
   - [Frontmatter > date](./frontmatter.md#date)
 
 ### deps
 
-- Type: `string[]`
+- 类型： `string[]`
 
-- Details:
+- 详情：
 
-  Dependencies of the page.
+  该 Page 的依赖。
 
-  For example, if users import code snippet in the page, the absolute file path of the imported file would be added to `deps`.
+  举例来说，如果在页面中导入了代码片段，那么被导入文件的绝对路径就会被添加到 `deps` 中。
 
-- Also see:
-  - [Config > markdown.importCode](./config.md#markdown-importcode)
+- 参考：
+  - [配置 > markdown.importCode](./config.md#markdown-importcode)
 
 ### links
 
-- Type: `MarkdownLink[]`
+- 类型： `MarkdownLink[]`
 
 ```ts
 interface MarkdownLink {
@@ -514,131 +512,131 @@ interface MarkdownLink {
 }
 ```
 
-- Details:
+- 详情：
 
-  Links included in the page content.
+  该 Page 内容中包含的链接。
 
 ### markdownEnv
 
-- Type: `Record<string, unknown>`
+- 类型： `Record<string, unknown>`
 
-- Details:
+- 详情：
 
-  The `env` object when parsing markdown content with markdown-it.
+  在使用 markdown-it 解析 Markdown 内容时的 `env` 对象。
 
-  Some markdown-it plugins may store extra information inside this object, and you can make use of them for advanced customization.
+  一些 markdown-it 插件可能会在这个对象中存储一些额外的信息，你可以使用它们来进行高级定制化。
 
-  Notice that some other page properties are also extracted from the original `env` object. Those properties have already been removed from `page.markdownEnv`.
+  需要注意的是，其他的一些 Page 属性其实也是从 `env` 对象中获取到的，但是我们已经把这些属性从 `page.markdownEnv` 中移除掉了。
 
-- Also see:
+- 参考：
   - [markdown-it > API Documentation > MarkdownIt > parse](https://markdown-it.github.io/markdown-it/#MarkdownIt.parse)
 
 ### pathInferred
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Route path of the page that inferred from file path.
+  该 Page 根据文件路径推断出的路由路径。
 
-  By default, the route path is inferred from the relative file path of the Markdown source file. However, users may explicitly set the route path, e.g. [permalink](#permalink), which would be used as the final route path of the page. So we keep the inferred path as a page property in case you may need it.
+  默认情况下，路由路径是根据 Markdown 源文件的相对文件路径推断出来的。然而，用户可能会显式指定页面路由，比如通过 [permalink](#permalink) 来指定该页面最终使用的路由路径。因此我们在 Page 属性中保留推断出来的路径，以便于你在某些情况下可能会用到它。
 
-  It would be `null` if the page does not come from a Markdown source file.
+  如果该 Page 不是来自于 Markdown 源文件，那么该属性会为 `null` 。
 
-- Example:
+- 示例：
 
   - `'/'`
   - `'/foo.html'`
 
-- Also see:
-  - [Guide > Page > Routing](../guide/page.md#routing)
-  - [Node API > Page Properties > path](#path)
+- 参考：
+  - [指南 > 页面 > 路由](../guide/page.md#路由)
+  - [Node API > Page 属性 > path](#path)
 
 ### pathLocale
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Locale prefix of the page route path.
+  该 Page 路由路径的 Locale 前缀。
 
-  It is inferred from the relative file path of the Markdown source file and the key of `locales` option in user config.
+  它是根据页面的 Markdown 源文件相对路径、以及用户配置的 `locales` 的键推断得到的。
 
-- Example:
+- 示例：
 
   - `'/'`
   - `'/en/'`
   - `'/zh/'`
 
-- Also see:
-  - [Config > locales](./config.md#locales)
+- 参考：
+  - [配置 > locales](./config.md#locales)
 
 ### permalink
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Permalink of the page.
+  该 Page 的永久链接。
 
-- Also see:
+- 参考：
   - [Frontmatter > permalink](./frontmatter.md#permalink)
   - [Frontmatter > permalinkPattern](./frontmatter.md#permalinkpattern)
 
 ### routeMeta
 
-- Type: `Record<string, unknown>`
+- 类型： `Record<string, unknown>`
 
-- Details:
+- 详情：
 
-  Custom data to be attached to the page route.
+  附加到页面路由记录上的额外数据。
 
-- Also see:
+- 参考：
   - [Frontmatter > routeMeta](./frontmatter.md#routemeta)
 
-::: tip What's the difference between route meta and page data?
-Both [route meta](#routemeta) and [page data](#data) is available in client side. However, route meta is attached to the page route record, so the route meta of all pages would be loaded at once when users enter your site. In the contrast, page data is saved in separated files, which would be loaded only when users enter the corresponding page.
+::: tip Route Meta 和 Page Data 的区别是什么？
+[Route Meta](#routemeta) 和 [Page Data](#data) 都可以在客户端代码中使用。然而， Route Meta 是附加在页面路由记录上的，因此当用户进入你的站点时，所有页面的 Route Meta 都会立即被加载。相比之下， Page Data 是存储在单独的文件中的，只有在用户进入对应页面时才会被加载。
 
-Therefore, it's not recommended to store large amounts of info into route meta, otherwise the initial loading speed will be affected a lot when your site has a large number of pages.
+因此，不建议在 Route Meta 中存储大量的信息，否则在站点有很多页面时，将会影响站点的初始加载速度。
 :::
 
 ### sfcBlocks
 
-- Type: `MarkdownSfcBlocks`
+- 类型： `MarkdownSfcBlocks`
 
-- Details:
+- 详情：
 
-  Extracted vue SFC blocks of the page.
+  该 Page 中提取出的 Vue SFC Blocks 。
 
-- Also see:
-  - [Config > markdown.sfc](./config.md#markdown-sfc)
+- 参考：
+  - [配置 > markdown.sfc](./config.md#markdown-sfc)
 
 ### slug
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Slug of the page.
+  该 Page 的 Slug 。
 
-  It is inferred from the filename of the Markdown source file.
+  它是根据页面的 Markdown 源文件的文件名推断得到的。
 
 ### filePath
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Absolute path of the Markdown source file of the page.
+  该 Page 的 Markdown 源文件的绝对路径。
 
-  It would be `null` if the page does not come from a Markdown source file.
+  如果该 Page 不是来自于 Markdown 源文件，那么该属性会为 `null` 。
 
 ### filePathRelative
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Relative path of the Markdown source file of the page.
+  该 Page 的 Markdown 源文件的相对路径。
 
-  It would be `null` if the page does not come from a Markdown source file.
+  如果该 Page 不是来自于 Markdown 源文件，那么该属性会为 `null` 。

@@ -1,12 +1,12 @@
-# Writing a Theme
+# 开发主题
 
 ::: tip
-Before reading this guide, you'd better learn the guide of [Writing a Plugin](./plugin.md) first.
+在阅读该指南之前，你最好先了解一下 [开发插件](./plugin.md) 指南。
 :::
 
-## Create a Theme
+## 创建一个主题
 
-A VuePress theme is a special plugin, which should satisfy the [Theme API](../reference/theme-api.md). Like plugins, a theme should also be a _Theme Object_ or a _Theme Function_, and could be wrapped with a function to receive options:
+VuePress 主题是一个特殊的插件，它应该符合 [主题 API](../reference/theme-api.md) 。和插件一样，主题可以是一个 _主题对象_ 或一个 _主题函数_ ，并且通常通过一个函数来接收配置项：
 
 ```ts
 import { getDirname, path } from 'vuepress/utils'
@@ -14,36 +14,36 @@ import { getDirname, path } from 'vuepress/utils'
 const __dirname = getDirname(import.meta.url)
 
 const fooTheme = (options) =>
-  // returns a theme object
+  // 返回一个主题对象
   ({
     name: 'vuepress-theme-foo',
 
-    // path to the client config of your theme
+    // 主题的客户端配置文件的路径
     clientConfigFile: path.resolve(__dirname, 'client.js'),
 
-    // set custom dev / build template
-    // if the template is not specified, the default template
+    // 设置自定义 dev / build 模板
+    // 如果没有指定模板，将会使用默认模板
     templateBuild: path.resolve(__dirname, 'templates/build.html'),
     templateDev: path.resolve(__dirname, 'templates/dev.html'),
 
-    // use plugins
+    // 使用插件
     plugins: [
       // ...
     ],
 
-    // other plugin APIs are also available
+    // 其他的插件 API 也都可用
   })
 
 const barTheme =
   (options) =>
-  // returns a theme function
+  // 返回一个主题函数
   (app) => ({
     name: 'vuepress-theme-bar',
     // ...
   })
 ```
 
-Then, create theme's client config file `client.js` :
+然后，创建主题的客户端配置文件 `client.js` :
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -58,9 +58,9 @@ export default defineClientConfig({
 })
 ```
 
-The `layouts` field declares the layouts provided by your theme. A theme must provide at least two layouts: `Layout` and `NotFound`. The former is to provide default layout for common pages, while the latter is to provide layout for 404-not-found page.
+`layouts` 字段声明了你的主题提供的布局。一个主题必须提供至少两个布局：`Layout` 和 `NotFound` 。前者用于提供一般页面的默认布局，后者用于提供 404 页面的布局。
 
-The `Layout` layout should contain the [Content](../reference/components.md#content) component to display the markdown content:
+`Layout` 布局应该包含 [Content](../reference/components.md#content) 组件来展示 Markdown 内容：
 
 ```vue
 <template>
@@ -70,7 +70,7 @@ The `Layout` layout should contain the [Content](../reference/components.md#cont
 </template>
 ```
 
-The `NotFound` layout will be used for the `404.html` page:
+`NotFound` 布局会被用于 `404.html` 页面：
 
 ```vue
 <template>
@@ -78,11 +78,11 @@ The `NotFound` layout will be used for the `404.html` page:
 </template>
 ```
 
-You can provide more layouts, and users can change layout via [layout](../reference/frontmatter.md#layout) frontmatter.
+你可以提供多个布局，用户可以通过 [layout](../reference/frontmatter.md#layout) Frontmatter 来修改布局。
 
-## Publish to NPM
+## 发布到 NPM
 
-Also, there are some conventions for theme in [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json):
+同样的，对于主题也有 [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json) 相关的约定：
 
 ```json
 {
@@ -91,5 +91,5 @@ Also, there are some conventions for theme in [package.json](https://docs.npmjs.
 }
 ```
 
-- Set `name` to follow the naming convention: `vuepress-theme-xxx` or `@org/vuepress-theme-xxx`, which should be consistent with the [name](../reference/theme-api.md#name) field of the _Theme Object_.
-- Set `keywords` to include `vuepress-theme`, so that users can search your theme on NPM.
+- 将 `name` 按照约定命名： `vuepress-theme-xxx` 或 `@org/vuepress-theme-xxx` ，它应该和 _主题对象_ 的 [name](../reference/theme-api.md#name) 字段保持一致。
+- 在 `keywords` 中包含 `vuepress-theme` ，这样用户可以在 NPM 上搜索到你的主题。

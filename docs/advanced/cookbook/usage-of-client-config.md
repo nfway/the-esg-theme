@@ -1,6 +1,6 @@
-# Usage of Client Config
+# 客户端配置的使用方法
 
-You can make use of the [client config file](../../guide/configuration.md#client-config-file) directly in your project, or specify the file path in your plugin or theme via [clientConfigFile](../../reference/plugin-api.md#clientconfigfile) hook:
+你可以直接在你的项目中使用 [客户端配置文件](../../guide/configuration.md#客户端配置文件) 。或者，在你的插件或者主题中，使用 [clientConfigFile](../../reference/plugin-api.md#clientconfigfile) Hook 来指定客户端配置文件的路径：
 
 ```ts
 import { getDirname, path } from 'vuepress/utils'
@@ -12,7 +12,7 @@ const pluginOrTheme = {
 }
 ```
 
-Inside the client config file, `vuepress/client` provides a helper function [defineClientConfig](../../reference/client-api.md#defineclientconfig) to help you define the client config:
+在客户端配置文件中，`vuepress/client` 提供了一个 [defineClientConfig](../../reference/client-api.md#defineclientconfig) 函数来帮助你定义客户端配置：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -27,17 +27,17 @@ export default defineClientConfig({
 
 ## enhance
 
-The `enhance` function could be either synchronous or asynchronous. It accepts a context param with following properties:
+`enhance` 函数既可以是同步的，也可以是异步的。它接收一个 Context 参数，包含以下属性：
 
-- `app` is the Vue application instance that created by [createApp](https://vuejs.org/api/application.html#createapp).
-- `router` is the Vue Router instance that created by [createRouter](https://router.vuejs.org/api/#createrouter).
-- `siteData` is a ref of an object that generated from user config, including [base](../../reference/config.md#base), [lang](../../reference/config.md#lang), [title](../../reference/config.md#title), [description](../../reference/config.md#description), [head](../../reference/config.md#head) and [locales](../../reference/config.md#locales).
+- `app` 是由 [createApp](https://staging-cn.vuejs.org/api/application.html#create-app) 创建的 Vue 应用实例。
+- `router` 是由 [createRouter](https://router.vuejs.org/zh/api/index.html#createrouter) 创建的路由实例。
+- `siteData` 是一个根据用户配置生成的 Ref 对象，包含 [base](../../reference/config.md#base), [lang](../../reference/config.md#lang), [title](../../reference/config.md#title), [description](../../reference/config.md#description), [head](../../reference/config.md#head) 和 [locales](../../reference/config.md#locales)。
 
-The `enhance` function will be invoked after the client app is created. It's possible to implement any enhancements to the Vue application.
+`enhance` 函数会在客户端应用创建后被调用，你可以对 Vue 应用添加各种能力。
 
-### Register Vue Components
+### 注册 Vue 组件
 
-You can register global Vue components via the [app.component](https://vuejs.org/api/application.html#app-component) method:
+你可以通过 [app.component](https://staging-cn.vuejs.org/api/application.html#app-component) 方法来注册 Vue 全局组件：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -50,13 +50,13 @@ export default defineClientConfig({
 })
 ```
 
-### Use Non-SSR-Friendly Features
+### 使用不支持 SSR 的功能
 
-VuePress will generate a SSR application to pre-render pages during build. Generally speaking, if a code snippet is using Browser / DOM APIs before client app is mounted, we call it non-SSR-friendly.
+VuePress 会在构建过程中生成一个 SSR 应用，用以对页面进行预渲染。一般而言，如果一段代码在客户端应用 Mount 之前就使用了浏览器或 DOM API ，我们就认为其对 SSR 不友好，即不支持 SSR 。
 
-We already provides a [ClientOnly](../../reference/components.md#clientonly) component to wrap non-SSR-friendly content.
+我们已经提供了一个 [ClientOnly](../../reference/components.md#clientonly) 组件来包裹不支持 SSR 的内容。
 
-In the `enhance` function, you can make use of the [`__VUEPRESS_SSR__`](../../reference/client-api.md#ssr) flag for that purpose.
+在 `enhance` 函数中，你可以使用 [`__VUEPRESS_SSR__`](../../reference/client-api.md#ssr) 标记来处理这种情况。
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -71,9 +71,9 @@ export default defineClientConfig({
 })
 ```
 
-### Use Router Methods
+### 使用 Router 方法
 
-You can make use of the [Router Methods](https://router.vuejs.org/api/#router-methods) that provided by vue-router. For example, add navigation guard:
+你可以使用 vue-router 提供的 [Router 方法](https://router.vuejs.org/zh/api/index.html#router-方法) 。例如，添加导航钩子：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -92,18 +92,18 @@ export default defineClientConfig({
 ```
 
 ::: warning
-It's not recommended to use `addRoute` method to add dynamic routes here, because those routes will **NOT** be pre-rendered in build mode.
+我们不推荐使用 `addRoute` 方法来添加动态路由，因为这些路由记录 **不会** 在构建模式中被预渲染出来。
 
-But you can still do that if you understand the drawback.
+当然，如果你了解了这种用法的缺点，你还是可以这样使用。
 :::
 
 ## setup
 
-The `setup` function would be invoked inside the [setup](https://vuejs.org/api/composition-api-setup.html) hook of the client vue app.
+`setup` 函数会在客户端 Vue 应用的 [setup](https://staging-cn.vuejs.org/api/composition-api-setup.html) Hook 中被调用。
 
-### Use Composition API
+### 使用组合式 API
 
-You can take the `setup` function as part of the [setup](https://vuejs.org/api/composition-api-setup.html) hook of the root component. Thus, all composition APIs are available here.
+你可以把 `setup` 函数当作根组件的 [setup](https://staging-cn.vuejs.org/api/composition-api-setup.html) Hook 中的一部分。因此，所有的组合式 API 都可以在这里使用。
 
 ```ts
 import { provide, ref } from 'vue'
@@ -112,22 +112,22 @@ import { defineClientConfig } from 'vuepress/client'
 
 export default defineClientConfig({
   setup() {
-    // get the current route location
+    // 获取当前的路由位置
     const route = useRoute()
-    // get the vue-router instance
+    // 或者 vue-router 实例
     const router = useRouter()
-    // provide a value that can be injected by layouts, pages and other components
+    // 供给一个值，可以被布局、页面和其他组件注入
     const count = ref(0)
     provide('count', count)
   },
 })
 ```
 
-### Use Non-SSR-Friendly Features
+### 使用不支持 SSR 的功能
 
-In the `setup` function, the [`__VUEPRESS_SSR__`](../../reference/client-api.md#ssr) flag is also available.
+在 `setup` 函数中，[`__VUEPRESS_SSR__`](../../reference/client-api.md#ssr) 标记同样可用。
 
-Another way to use non-ssr-friendly features is to put them inside the [onMounted](https://vuejs.org/api/composition-api-lifecycle.html#onmounted) hook:
+使用不支持 SSR 的功能的另一种方式就是将他们放在 [onMounted](https://staging-cn.vuejs.org/api/composition-api-lifecycle.html#onmounted) Hook 中：
 
 ```ts
 import { onMounted } from 'vue'
@@ -136,7 +136,7 @@ import { defineClientConfig } from 'vuepress/client'
 export default defineClientConfig({
   setup() {
     onMounted(() => {
-      // use DOM API after mounted
+      // 在 mounted 之后使用 DOM API
       document.querySelector('#app')
     })
   },
@@ -145,7 +145,7 @@ export default defineClientConfig({
 
 ## layouts
 
-The `layouts` options is to set layout components. After layout components are registered here, users can use it via [layout](../../reference/frontmatter.md#layout) frontmatter.
+`layouts` 配置项用于设置布局组件。你在此处注册布局后，用户就可以通过 [layout](../../reference/frontmatter.md#layout) frontmatter 来使用它们。
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -160,9 +160,9 @@ export default defineClientConfig({
 
 ## rootComponents
 
-The `rootComponents` is a components array to be placed directly into the root node of the client vue app.
+`rootComponents` 是一个组件数组，它们将会直接被放置在客户端 Vue 应用的根节点下。
 
-Typical usage of this option is to put some global UI components, like global popup or so:
+该选项的典型使用方式就是放置一些全局的 UI 组件，比如全局弹窗等：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'

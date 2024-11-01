@@ -1,46 +1,46 @@
-# Theme API
+# 主题 API
 
-A VuePress theme also works as a plugin, so Theme API can accept all the options of [Plugin API](./plugin-api.md) with following differences.
+VuePress 主题同样是一个插件，因此主题 API 可以接收 [插件 API](./plugin-api.md) 的所有选项，但存在以下差别：
 
-## Basic Options
+## 基础配置项
 
 ### name
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Name of the theme.
+  主题的名称。
 
-  It should follow the naming convention, and ensure consistency with the package name when publishing to NPM:
+  它应遵从如下命名约定，并且在发布到 NPM 时应确保和包名保持一致：
 
-  - Non-scoped: `vuepress-theme-foo`
+  - 非 Scoped: `vuepress-theme-foo`
   - Scoped: `@org/vuepress-theme-foo`
 
 ### multiple
 
-- Details:
+- 详情：
 
-  A theme should never be used multiple times, so this option is not supported in theme API.
+  主题永远不能被多次使用，因此主题 API 不支持该配置项。
 
-## Theme Specific Options
+## 主题特定配置项
 
 ### extends
 
-- Type: `Theme`
+- 类型： `Theme`
 
-- Details:
+- 详情：
 
-  The theme to inherit.
+  要继承的主题。
 
-  All of the Theme API of the parent theme will be inherited, but the child theme will not override the parent theme directly. Theme specific options will override according to following rules:
+  父主题的所有主题 API 都会被继承，但是子主题不会直接覆盖父主题。主题特定的配置项会根据以下规则进行覆盖：
 
-  - [plugins](#plugins): When a same plugin is used in both child and parent theme, if the plugin does not support to be used multiple times, only the one used in the child theme will take effect.
-  - [templateBuild](#templatebuild) / [templateDev](#templatedev): Child theme templates will override parent theme templates.
+  - [plugins](#plugins)： 当同一个插件在子主题和父主题中都被使用时，如果该插件不支持被多次使用，那么只有在子主题中使用的插件会生效。
+  - [templateBuild](#templatebuild) / [templateDev](#templatedev)： 子主题的模板会覆盖父主题的模板。
 
-  Multi-level inheritance is supported, i.e. theme B could be extended from theme A, and then theme C could be extended from theme B. In other words, a theme could have a parent theme, a grandparent theme and so on.
+  支持多级继承，即主题 B 可以继承主题 A ，然后主题 C 可以继承主题 B 。换句话说，一个主题可以有一个父主题、一个祖父主题等等。
 
-- Example:
+- 示例：
 
 ```ts
 import { defaultTheme } from '@vuepress/theme-default'
@@ -49,57 +49,57 @@ import { getDirname, path } from 'vuepress/utils'
 const __dirname = getDirname(import.meta.url)
 
 export default {
-  // inherit the default theme
+  // 继承默认主题
   extends: defaultTheme(),
 }
 ```
 
 ### plugins
 
-- Type: `(Plugin | Plugin[])[]`
+- 类型： `(Plugin | Plugin[])[]`
 
-- Details:
+- 详情：
 
-  Plugins to use in the theme.
+  主题中要使用的插件。
 
-- Also see:
-  - [Config > plugins](./config.md#plugins)
+- 参考：
+  - [配置 > plugins](./config.md#plugins)
 
 ### templateBuild
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the path of the HTML template for build.
+  指定构建时使用的 HTML 模板路径。
 
-  It would override the default value of [templateBuild](./config.md#templatebuild), and could be overridden by user config.
+  它会覆盖 [templateBuild](./config.md#templatebuild) 的默认值，同时也会被用户配置覆盖。
 
-- Also see:
-  - [Config > templateBuild](./config.md#templatebuild)
+- 参考：
+  - [配置 > templateBuild](./config.md#templatebuild)
 
 ### templateBuildRenderer
 
-- Type: `TemplateRenderer`
+- 类型： `TemplateRenderer`
 
-- Details:
+- 详情：
 
-  Specify the HTML template renderer to be used for build.
+  指定构建时使用的 HTML 模板渲染函数。
 
-  It would override the default value of [templateBuildRenderer](./config.md#templatebuildrenderer), and could be overridden by user config.
+  它会覆盖 [templateBuildRenderer](./config.md#templatebuildrenderer) 的默认值，同时也会被用户配置覆盖。
 
-- Also see:
-  - [Config > templateBuildRenderer](./config.md#templatebuildrenderer)
+- 参考：
+  - [配置 > templateBuildRenderer](./config.md#templatebuildrenderer)
 
 ### templateDev
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the HTML template for dev.
+  指定开发时使用的 HTML 模板。
 
-  It would override the default value of [templateDev](./config.md#templatedev), but could be overridden by user config.
+  它会覆盖 [templateDev](./config.md#templatedev) 的默认值，但是也会被用户配置覆盖。
 
-- Also see:
-  - [Config > templateDev](./config.md#templatedev)
+- 参考：
+  - [配置 > templateDev](./config.md#templatedev)

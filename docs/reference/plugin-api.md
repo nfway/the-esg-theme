@@ -1,15 +1,15 @@
-# Plugin API
+# 插件 API
 
-You could check out [Node API](./node-api.md) for how to use the VuePress app instance in plugin hooks.
+你可以查看 [Node API](./node-api.md) 来了解如何使用插件 Hooks 中的 VuePress App 实例。
 
-## Overview
+## 概览
 
-Plugins should be used before initialization. The basic options will be handled once the plugin is used:
+插件需要在初始化之前使用。基础配置项会在使用插件时立即被处理：
 
 - [name](#name)
 - [multiple](#multiple)
 
-The following hooks will be processed when initializing app:
+下列 Hooks 会在初始化 App 时处理：
 
 - [extendsMarkdownOptions](#extendsmarkdownoptions)
 - [extendsMarkdown](#extendsmarkdown)
@@ -17,12 +17,12 @@ The following hooks will be processed when initializing app:
 - [extendsPage](#extendspage)
 - [onInitialized](#oninitialized)
 
-The following hooks will be processed when preparing files:
+下列 Hooks 会在准备文件时处理：
 
 - [clientConfigFile](#clientconfigfile)
 - [onPrepared](#onprepared)
 
-The following hooks will be processed in dev / build:
+下列 Hooks 会在 dev / build 时处理：
 
 - [extendsBundlerOptions](#extendsbundleroptions)
 - [alias](#alias)
@@ -30,58 +30,58 @@ The following hooks will be processed in dev / build:
 - [onWatched](#onwatched)
 - [onGenerated](#ongenerated)
 
-> Check out [Advanced > Architecture > Core Process and Hooks](../advanced/architecture.md#core-process-and-hooks) to understand the process better.
+> 查看 [深入 > 架构 > 核心流程与 Hooks](../advanced/architecture.md#核心流程与-hooks) 来更好地理解该流程。
 
-## Basic Options
+## 基础配置项
 
 ### name
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Name of the plugin.
+  插件的名称。
 
-  It will be used for identifying plugins to avoid using a same plugin multiple times, so make sure to use a unique plugin name.
+  它会被用来识别插件，以避免多次使用同一个插件，因此应确保你的插件名称是独一无二的。
 
-  It should follow the naming convention:
+  它应遵从如下命名约定：
 
-  - Non-scoped: `vuepress-plugin-foo`
+  - 非 Scoped: `vuepress-plugin-foo`
   - Scoped: `@org/vuepress-plugin-foo`
 
-- Also see:
-  - [Plugin API > multiple](#multiple)
+- 参考：
+  - [插件 API > multiple](#multiple)
 
 ### multiple
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `false`
+- 默认值： `false`
 
-- Details:
+- 详情：
 
-  Declare whether the plugin can be used multiple times.
+  插件是否能够被多次使用。
 
-  If set to `false`, when using plugins with the same name, the one used previously will be replaced by the one used later.
+  如果设置为 `false` ，当有相同名称的插件被使用时，先使用的会被后使用的替换掉。
 
-  If set to `true`, plugins with the same name could be used multiple times and won't be replaced.
+  如果设置为 `true` ，相同名称的插件可以被多次使用且不会被替换。
 
-- Also see:
-  - [Plugin API > name](#name)
+- 参考：
+  - [插件 API > name](#name)
 
-## Development Hooks
+## 开发 Hooks
 
 ### alias
 
-- Type: `Record<string, any> | ((app: App, isServer: boolean) => Record<string, any>)`
+- 类型： `Record<string, any> | ((app: App, isServer: boolean) => Record<string, any>)`
 
-- Details:
+- 详情：
 
-  Path aliases definition.
+  定义路径别名。
 
-  This hook accepts an object or a function that returns an object.
+  该 Hook 接收一个对象，或者一个返回对象的函数。
 
-- Example:
+- 示例：
 
 ```ts
 import { getDirname, path } from 'vuepress/utils'
@@ -97,15 +97,15 @@ export default {
 
 ### clientConfigFile
 
-- Type: `string | ((app: App) => string | Promise<string>)`
+- 类型： `string | ((app: App) => string | Promise<string>)`
 
-- Details:
+- 详情：
 
-  Path of client config file.
+  客户端配置文件路径。
 
-  This hook accepts an absolute file path, or a function that returns the path.
+  该 Hook 接收文件绝对路径，或者一个返回路径的函数。
 
-- Example:
+- 示例：
 
 ```ts
 import { getDirname, path } from 'vuepress/utils'
@@ -117,23 +117,23 @@ export default {
 }
 ```
 
-- Also see:
-  - [Client API > defineClientConfig](./client-api.md#defineclientconfig)
-  - [Advanced > Cookbook > Usage of Client Config](../advanced/cookbook/usage-of-client-config.md)
+- 参考：
+  - [客户端 API > defineClientConfig](./client-api.md#defineclientconfig)
+  - [深入 > Cookbook > 客户端配置的使用方法](../advanced/cookbook/usage-of-client-config.md)
 
 ### define
 
-- Type: `Record<string, any> | ((app: App, isServer: boolean) => Record<string, any>)`
+- 类型： `Record<string, any> | ((app: App, isServer: boolean) => Record<string, any>)`
 
-- Details:
+- 详情：
 
-  Define global constants replacements.
+  定义全局常量。
 
-  This hook accepts an object or a function that returns an object.
+  该 Hook 接收一个对象，或者一个返回对象的函数。
 
-  This can be useful for passing variables to client files. Note that the values will be automatically processed by `JSON.stringify()`.
+  它可以被用于向客户端文件传递变量。注意这里的值都会自动被 `JSON.stringify()` 处理。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -147,26 +147,26 @@ export default {
 
 ### extendsBundlerOptions
 
-- Type: `(options: BundlerOptions, app: App) => void | Promise<void>`
+- 类型： `(options: BundlerOptions, app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  Bundler options extension.
+  Bundler 配置项扩展。
 
-  This hook accepts a function that will receive the bundler options.
+  该 Hook 接收一个函数，在参数中会收到 Bundler 配置项。
 
-  This hook can be used for modifying bundler options.
+  该 Hook 可以用于修改 Bundler 配置项。
 
-  You could determine which bundler the user is using by `app.options.bundler.name`.
+  你可以通过 `app.options.bundler.name` 判断用户当前使用的 Bundler。
 
-- Example:
+- 示例：
 
-Adding default [app.compilerOptions.isCustomElement](https://vuejs.org/api/application.html#app-config-compileroptions) option:
+添加默认的 [app.compilerOptions.isCustomElement](https://vuejs.org/api/application.html#app-config-compileroptions) 配置：
 
 ```ts
 export default {
   extendsBundlerOptions: (bundlerOptions, app) => {
-    // extends options of @vuepress/bundler-vite
+    // 修改 @vuepress/bundler-vite 的配置项
     if (app.options.bundler.name === '@vuepress/bundler-vite') {
       bundlerOptions.vuePluginOptions ??= {}
       bundlerOptions.vuePluginOptions.template ??= {}
@@ -180,7 +180,7 @@ export default {
         }
     }
 
-    // extends options of @vuepress/bundler-webpack
+    // 修改 @vuepress/bundler-webpack 的配置项
     if (app.options.bundler.name === '@vuepress/bundler-webpack') {
       bundlerOptions.vue ??= {}
       bundlerOptions.vue.compilerOptions ??= {}
@@ -194,25 +194,25 @@ export default {
 }
 ```
 
-- Also see:
-  - [Bundlers > Vite](./bundler/vite.md)
-  - [Bundlers > Webpack](./bundler/webpack.md)
+- 参考：
+  - [打包工具 > Vite](./bundler/vite.md)
+  - [打包工具 > Webpack](./bundler/webpack.md)
 
 ### extendsMarkdownOptions
 
-- Type: `(options: MarkdownOptions, app: App) => void | Promise<void>`
+- 类型： `(options: MarkdownOptions, app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  Markdown options extension.
+  Markdown 配置项扩展。
 
-  This hook accepts a function that will receive the markdown options.
+  该 Hook 接收一个函数，在参数中会收到 Markdown 配置项。
 
-  This hook can be used for modifying markdown options.
+  该 Hook 可以用于修改 Markdown 配置项。
 
-- Example:
+- 示例：
 
-Modifying the default header levels that going to be extracted:
+修改默认提取的子标题层级：
 
 ```ts
 export default {
@@ -225,22 +225,22 @@ export default {
 }
 ```
 
-- Also see:
-  - [Config > markdown](./config.md#markdown)
+- 参考：
+  - [配置 > markdown](./config.md#markdown)
 
 ### extendsMarkdown
 
-- Type: `(md: Markdown, app: App) => void | Promise<void>`
+- 类型： `(md: Markdown, app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  Markdown enhancement.
+  Markdown 增强。
 
-  This hook accepts a function that will receive an instance of `Markdown` powered by [markdown-it](https://github.com/markdown-it/markdown-it) in its arguments.
+  该 Hook 接收一个函数，在参数中会收到一个由 [markdown-it](https://github.com/markdown-it/markdown-it) 提供的 `Markdown` 实例。
 
-  This hook can be used for using extra markdown-it plugins and implementing customizations.
+  该 Hook 可以用来添加额外的 markdown-it 插件、应用额外的自定义功能。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -253,19 +253,19 @@ export default {
 
 ### extendsPageOptions
 
-- Type: `(options: PageOptions, app: App) => void | Promise<void>`
+- 类型： `(options: PageOptions, app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  Page options extension.
+  页面配置项扩展。
 
-  This hook accepts a function that will receive the options of `createPage`.
+  该 Hook 接收一个函数，在参数中会收到 `createPage` 传入的配置项。
 
-  This hook can be used for modifying page options
+  该 Hook 可以用于修改页面配置项。
 
-- Example:
+- 示例：
 
-Set permalink pattern for pages in `_posts` directory:
+为 `_posts` 目录下的页面设置永久链接 Pattern ：
 
 ```ts
 export default {
@@ -278,24 +278,24 @@ export default {
 }
 ```
 
-- Also see:
-  - [Node API > Page > createPage](./node-api.md#createpage)
+- 参考：
+  - [Node API > Page > createPage](./node-api.md#createPage)
 
 ### extendsPage
 
-- Type: `(page: Page, app: App) => void | Promise<void>`
+- 类型： `(page: Page, app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  Page extension.
+  页面扩展。
 
-  This hook accepts a function that will receive a `Page` instance.
+  该 Hook 接收一个函数，在参数中会收到一个 `Page` 实例。
 
-  This hook can be used for adding extra properties or modifying current properties on `Page` object.
+  该 Hook 可以用来在 Page 对象上添加额外的属性，或修改现有的属性等。
 
-  Notice that changes to `page.data` and `page.routeMeta` can be used in client side code.
+  值得一提的是，针对 `page.data` 和 `page.routeMeta` 的改动可以在客户端代码中使用。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -306,7 +306,7 @@ export default {
 }
 ```
 
-In client component:
+在客户端组件中：
 
 ```ts
 import { usePageData } from 'vuepress/client'
@@ -319,45 +319,45 @@ export default {
 }
 ```
 
-- Also see:
-  - [Client API > usePageData](./client-api.md#usepagedata)
-  - [Node API > Page Properties > data](./node-api.md#data)
-  - [Node API > Page Properties > routeMeta](./node-api.md#routemeta)
+- 参考：
+  - [客户端 API > usePageData](./client-api.md#usepagedata)
+  - [Node API > Page 属性 > data](./node-api.md#data)
+  - [Node API > Page 属性 > routeMeta](./node-api.md#routemeta)
 
-## Lifecycle Hooks
+## 生命周期 Hooks
 
 ### onInitialized
 
-- Type: `(app: App) => void | Promise<void>`
+- 类型： `(app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  This hook will be invoked once VuePress app has been initialized.
+  该 Hook 会在 VuePress App 初始化后被立即调用。
 
 ### onPrepared
 
-- Type: `(app: App) => void | Promise<void>`
+- 类型： `(app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  This hook will be invoked once VuePress app has finished preparation.
+  该 Hook 会在 VuePress App 完成文件准备后被立即调用。
 
 ### onWatched
 
-- Type: `(app: App, watchers: Closable[], restart: () => Promise<void>) => void | Promise<void>`
+- 类型： `(app: App, watchers: Closable[], restart: () => Promise<void>) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  This hook will be invoked once VuePress app has started dev-server and watched files change.
+  该 Hook 会在 VuePress App 启动开发服务器并开始监听文件修改后被调用。
 
-  The `watchers` is an array of file watchers. When changing config file, the dev command will be restarted and those watchers will be closed. If you are adding new watchers in this hook, you should push your watchers to the `watchers` array, so that they can be closed correctly when restarting.
+  `watchers` 是一个文件监听器的数组。在修改配置文件导致重启 dev 命令时，这些监听器会被自动关闭。如果你在当前 Hook 中添加了新的监听器，你应该把它们也加入到这个数组中，确保在重启 dev 命令时它们能被正确关闭。
 
-  The `restart` is a method to restart the dev command. When calling this method, the `watchers` array will be closed automatically.
+  `restart` 方法用来重启 dev 命令。调用该方法时， `watchers` 数组中的监听器也会被自动关闭。
 
 ### onGenerated
 
-- Type: `(app: App) => void | Promise<void>`
+- 类型： `(app: App) => void | Promise<void>`
 
-- Details:
+- 详情：
 
-  This hook will be invoked once VuePress app has generated static files.
+  该 Hook 会在 VuePress App 完成静态文件生成后被立即调用。

@@ -1,30 +1,30 @@
-# Resolving Routes
+# 解析路由
 
-## Getting all routes
+## 获取全部路由
 
-You can make use of [useRoutes](../../reference/client-api.md#useroutes) to get all routes information.
+在开发主题和插件时，你可能希望获取所有页面的信息。通过 [useRoutes](../../reference/client-api.md#useroutes) 就可以获取所有页面的路由记录。
 
-The return value of `useRoutes` is a Ref object containing all routes. The keys are route paths of each route, and the values are the corresponding route information.
+`useRoutes` 的返回值是一个包含了所有路由信息的 Ref 对象。其属性是每条路由的路由路径，对应的值是路径的路由信息。
 
 ```ts
 import { useRoutes } from 'vuepress/client'
 
 const routes = useRoutes()
 // {
-// '/': { meta: { title: 'Home' }, loader: HomePageLoader },
-// '/404.html': { meta: { title: 'Not Found' }, loader: NotFoundPageLoader },
-// ...
+//   '/': { meta: { title: 'Home' }, loader: HomePageLoader },
+//   '/404.html': { meta: { title: 'Not Found' }, loader: NotFoundPageLoader },
+//   ...
 // }
 
 const routePaths = computed(() => Object.keys(routes.value))
-// => ['/‘, '/404.html', '/foo/', '/bar/', ...]
+// => [’/‘, '/404.html', '/foo/', '/bar/', ...]
 ```
 
-## Resolving route path
+## 解析路由地址
 
-You can make use of [resolveRoutePath](../../reference/client-api.md#resolveroutepath) to resolve the route path of the given link.
+你可以使用 [resolveRoutePath](../../reference/client-api.md#resolveroutepath) 来解析给定的链接对应的路由路径。
 
-`resolveRoutePath` receives a link and an optional base path, and returns the resolved route path:
+`resolveRoutePath` 接收一个链接地址和一个可选的基础路径，返回一个解析后的路由地址:
 
 ```ts
 import { resolveRoutePath } from 'vuepress/client'
@@ -33,11 +33,11 @@ const routePath = resolveRoutePath('/foo/') // => '/foo/'
 const routePath = resolveRoutePath('baz.html', '/foo/bar.html') // => '/foo/baz.html'
 ```
 
-## Resolving route information
+## 解析路由信息
 
-You can make use of [resolveRoute](../../reference/client-api.md#resolveroute) to resolve route information for a given link.
+你可以使用 [resolveRoute](../../reference/client-api.md#resolveroute) 来解析给定的链接对应的路由信息。
 
-`resolveRoute` receives a link and an optional base path, and returns the resolved route information:
+`resolveRoute` 接收一个链接地址和一个可选的基础路径，返回一个解析后的路由信息:
 
 ```ts
 import { resolveRoute } from 'vuepress/client'
@@ -47,4 +47,4 @@ const route = resolveRoute('baz.html', '/foo/bar.html') // => { notFound: false,
 const route = resolveRoute('/not-exist.html') // => { notFound: true, path: '/not-exist.html', meta: { title: 'Not Found' }, loader: NotFoundPageLoader }
 ```
 
-There is a `notFound` field in the returned information, which is used to indicate whether a corresponding route exists for a given path. When the route does not exist, the `notFound` field would be `true`, the `path` field would be the normalized path, and the `meta` and `loader` fields would point to the default 404 page.
+路由信息中存在一个 `notFound` 字段，用于标识给定的路径是否存在对应的路由。当路由不存在时，返回值中的 `notFound` 字段为 `true`，其 `path` 字段为规范化后的路径，而 `meta` 和 `loader` 字段则会指向默认的 404 页面。

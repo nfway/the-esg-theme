@@ -1,12 +1,12 @@
-# Passing Data to Client Code
+# 向客户端代码传递数据
 
-As we know, VuePress plugin entries and theme entries are processed in Node side, but sometimes you might need to pass data to client side. For example, you want to generate different data when users use different options.
+我们知道，VuePress 插件入口和主题入口是在 Node 端处理的，但有时候你可能需要向客户端动态传递数据。例如，你希望在用户传入不同的选项时生成不同的数据。
 
-## Use `define` Hook
+## 使用 `define` Hook
 
-Plugin API provides a [define](../../reference/plugin-api.md#define) hook to define global constants for client code. You can make use of it to pass data to client.
+插件 API 提供了一个 [define](../../reference/plugin-api.md#define) Hook 来定义客户端代码中的全局常量。你可以利用它来向客户端传递数据。
 
-First, define some constants in `define` hook:
+首先，通过 `define` Hook 定义一些常量：
 
 ```ts
 export default (options) => ({
@@ -19,30 +19,30 @@ export default (options) => ({
 })
 ```
 
-Then use them in client code directly:
+然后，在客户端代码中直接使用它们：
 
 ```ts
 const foo = __FOO__
 const obj = __OBJ__
 ```
 
-If you are using TypeScript in client code, you may need to declare the types of the global constants manually:
+如果你在客户端代码中使用 TypeScript ，你可能需要手动声明这些全局常量的类型：
 
 ```ts
 declare const __FOO__: string
 declare const __OBJ__: { bar: number }
 ```
 
-## Write and Load Temp Files
+## 写入并加载临时文件
 
-If you need to achieve some more complex features, you can write temp files and load them dynamically in client code.
+如果你需要实现一些更复杂的功能，你可以写入临时文件，并在客户端代码中动态加载它们。
 
-First, write a temp file `foo.js`, which will be generated in the [temp](../../reference/config.md#temp) directory:
+首先，写入一个名为 `foo.js` 的临时文件，它将会生成在 [temp](../../reference/config.md#temp) 目录中：
 
 ```ts
 export default (options) => ({
   async onPrepared(app) {
-    // write temp file
+    // 写入临时文件
     await app.writeTemp(
       'foo.js',
       `export const foo = ${JSON.stringify(options.foo)}`,
@@ -51,13 +51,13 @@ export default (options) => ({
 })
 ```
 
-Then, load the temp file via `@temp` alias in client code:
+然后，在客户端代码中通过 `@temp` 别名来加载临时文件：
 
 ```ts
 import { foo } from '@temp/foo'
 ```
 
-If you are using TypeScript in client code, you may need to declare the type of the temp module manually:
+如果你在客户端代码中使用 TypeScript ，你可能需要手动声明这些临时模块的类型：
 
 ```ts
 declare module '@temp/foo' {

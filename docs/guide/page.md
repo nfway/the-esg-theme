@@ -1,12 +1,12 @@
-# Page
+# 页面
 
-VuePress is markdown-centered. Each markdown file inside your project is a standalone page.
+VuePress 是以 Markdown 为中心的。你项目中的每一个 Markdown 文件都是一个单独的页面。
 
-## Routing
+## 路由
 
-By default, the route path of a page is determined by the relative path of your markdown file.
+默认情况下，页面的路由路径是根据你的 Markdown 文件的相对路径决定的。
 
-Assuming this is the directory structure of your markdown files:
+假设这是你的 Markdown 文件所处的目录结构：
 
 ```
 └─ docs
@@ -17,9 +17,9 @@ Assuming this is the directory structure of your markdown files:
    └─ README.md
 ```
 
-Take the `docs` directory as your [sourceDir](../reference/cli.md), e.g. you are running `vuepress dev docs` command. Then the route paths of your markdown files would be:
+将 `docs` 目录作为你的 [sourceDir](../reference/cli.md) ，例如你在运行 `vuepress dev docs` 命令。此时，你的 Markdown 文件对应的路由路径为：
 
-| Relative Path               | Route Path                    |
+| 相对路径                    | 路由路径                      |
 | --------------------------- | ----------------------------- |
 | `/README.md`                | `/`                           |
 | `/index.md`                 | `/`                           |
@@ -28,37 +28,37 @@ Take the `docs` directory as your [sourceDir](../reference/cli.md), e.g. you are
 | `/guide/getting-started.md` | `/guide/getting-started.html` |
 
 ::: tip
-By default, both `README.md` and `index.md` would be converted to `index.html` and generate a slash-ending route path. However, it might cause conflicts if you want to keep both of the two files.
+默认配置下， `README.md` 和 `index.md` 都会被转换成 `index.html` ，并且其对应的路由路径都是由斜杠结尾的。然而，如果你想同时保留这两个文件，就可能会造成冲突。
 
-In such case, you can set the [pagePatterns](../reference/config.md#pagepatterns) to avoid one of them being processed by VuePress, e.g. use `['**/*.md', '!**/README.md', '!.vuepress', '!node_modules']` to exclude all `README.md` files.
+在这种情况下，你可以设置 [pagePatterns](../reference/config.md#pagepatterns) 来避免某个文件被 VuePress 处理，例如使用 `['**/*.md', '!**/README.md', '!.vuepress', '!node_modules']` 来排除所有的 `README.md` 文件。
 
-Also, some symbols like `:` and `+` may have special meanings for vue-router, so you should avoid using them, see [vue-router docs](https://router.vuejs.org/guide/essentials/route-matching-syntax.html) for more details.
+此外，一些符号如 `:` 和 `+` 可能对 vue-router 有特殊含义，因此你应该避免使用它们，请参阅 [vue-router 文档](https://router.vuejs.org/zh/guide/essentials/route-matching-syntax.html) 了解更多详情。
 :::
 
 ## Frontmatter
 
-A markdown file could contain a [YAML](https://yaml.org/) frontmatter. The frontmatter must be at the top of the Markdown file and must be wrapped with a couple of triple-dashed lines. Here is a basic example:
+Markdown 文件可以包含一个 [YAML](https://yaml.org/) Frontmatter 。Frontmatter 必须在 Markdown 文件的顶部，并且被包裹在一对三短划线中间。下面是一个基本的示例：
 
 ```md
 ---
-lang: en-US
-title: Title of this page
-description: Description of this page
+lang: zh-CN
+title: 页面的标题
+description: 页面的描述
 ---
 ```
 
-You must have noticed that those fields are similar with the [Site Config](./configuration.md#site-config) in the [Config File](./configuration.md#config-file). You can override `lang`, `title`, `description`, etc., of current page via frontmatter. So you can take frontmatter as page scope config.
+你肯定注意到 Frontmatter 中的字段和[配置文件](./configuration.md#config-file)中的[站点配置](./configuration.md#站点配置)十分类似。你可以通过 Frontmatter 来覆盖当前页面的 `lang`, `title`, `description` 等属性。因此，你可以把 Frontmatter 当作页面级作用域的配置。
 
-Also, VuePress has built-in support for some frontmatter fields, and your theme may have its own special frontmatter, too.
+同样的，VuePress 有一些内置支持的 Frontmatter 字段，而你使用的主题也可能有它自己的特殊 Frontmatter 。
 
 ::: tip
-Check out the [Frontmatter Reference](../reference/frontmatter.md) for a full list of VuePress built-in frontmatter.
+前往 [Frontmatter 参考](../reference/frontmatter.md) 查看 VuePress 支持的 Frontmatter 配置。
 
-Check out the [Default Theme > Frontmatter Reference](https://ecosystem.vuejs.press/themes/default/frontmatter.html) for the frontmatter of default theme.
+前往 [默认主题 > Frontmatter 参考](https://ecosystem.vuejs.press/zh/themes/default/frontmatter.html) 查看默认主题的 Frontmatter 配置。
 :::
 
-## Content
+## 内容
 
-The main content of your page is written in Markdown. VuePress will firstly transform your Markdown to HTML code, then treat the HTML code as `<template>` of Vue SFC.
+页面的主要内容是使用 Markdown 书写的。VuePress 首先会将 Markdown 转换为 HTML ，然后将 HTML 作为 Vue 单文件组件的 `<template>` 。
 
-With the power of [markdown-it](https://github.com/markdown-it/markdown-it) and Vue template syntax, the basic Markdown can be extended a lot. Next, check out the [Markdown](./markdown.md) guide for all the extensions of Markdown in VuePress.
+借助 [markdown-it](https://github.com/markdown-it/markdown-it) 和 Vue 模板语法的能力，基础的 Markdown 可以得到很多的扩展功能。接下来，前往 [Markdown](./markdown.md) 章节来了解 VuePress 中 Markdown 的扩展功能。

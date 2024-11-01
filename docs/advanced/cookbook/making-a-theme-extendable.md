@@ -1,16 +1,16 @@
-# Making a Theme Extendable
+# 开发一个可继承的主题
 
-Sometimes users might want make some minor changes to a theme, but they don't want to fork and modify the entire project.
+有时用户可能希望对一个主题进行一些小改动，但是又不想 Fork 并修改整个项目。
 
-With the help of [Theme API](../../reference/theme-api.md), you can make your theme extendable, allowing users to make their own modifications easily.
+借助于 [主题 API](../../reference/theme-api.md) ，你可以让用户继承你的主题，允许用户对你的主题进行改动。
 
-You must have known that how to [extend default theme](https://ecosystem.vuejs.press/themes/default/extending.html). Here we'll introduce how to make your own theme extendable like default theme.
+你肯定已经知道了如何 [继承默认主题](https://ecosystem.vuejs.press/zh/themes/default/extending.html) 。接下来我们将介绍如何让你的主题像默认主题一样被用户继承。
 
-## Layout Slots
+## 布局插槽
 
-This approach requires you to determine which parts of your theme could be extended. It is more suitable for those common customizations like page footer or header.
+这种方式需要你来决定主题的哪些部分是可以被扩展的，它更适合用于一些常见的自定义需求，比如页眉或页脚。
 
-You just need to provide slots in your layouts, and tell users how to make use of them:
+你只需要在你的布局文件中提供 slots ，并告诉用户如何使用它们即可：
 
 ```vue
 <template>
@@ -22,29 +22,29 @@ You just need to provide slots in your layouts, and tell users how to make use o
 </template>
 ```
 
-## Component Aliases
+## 组件别名
 
-This approach requires you to consider which components of your theme should be replaceable, and you also need to split components into a suitable granularity.
+这种方式需要你考虑清楚你的主题的哪些组件可以被替换，并且你需要将组件拆分到合适的粒度。
 
-First, set `alias` for replaceable components of you theme:
+首先，为你主题的可替换组件设置 `alias` 别名：
 
 ```ts
 import type { Theme } from 'vuepress/core'
-import { getDirname } from 'vuepress/utils'
+import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url)
 
 export const fooTheme = (options): Theme => ({
   name: 'vuepress-theme-foo',
   alias: {
-    // set alias for replaceable components
+    // 为可替换的组件设置别名
     '@theme/Navbar.vue': path.resolve(__dirname, 'components/Navbar.vue'),
     '@theme/Sidebar.vue': path.resolve(__dirname, 'components/Sidebar.vue'),
   },
 })
 ```
 
-Next, use those components via aliases in your theme:
+然后，在你的主题中通过别名来使用这些组件：
 
 ```vue
 <script setup lang="ts">
@@ -61,4 +61,4 @@ import Sidebar from '@theme/Sidebar.vue'
 </template>
 ```
 
-Then, users can replace specific components by overriding the `alias` when extending or using your theme.
+这样，用户在继承或使用你的主题时，就可以通过覆盖 `alias` 来替换特定的组件了。

@@ -1,18 +1,18 @@
-# Client API
+# 客户端 API
 
-Client API can be imported from `vuepress/client`.
+客户端 API 可以通过 `vuepress/client` 来引入。
 
-## Composition API
+## 组合式 API
 
 ### useClientData
 
-- Details:
+- 详情：
 
-  Returns all the client data ref objects.
+  返回所有客户端数据的 Ref 对象。
 
-  Each property can also be accessed by the following composition APIs.
+  每个属性也可以通过下列的组合式 API 来访问。
 
-- Example:
+- 示例：
 
 ```vue
 <script setup lang="ts">
@@ -33,122 +33,122 @@ const {
 
 ### usePageData
 
-- Details:
+- 详情：
 
-  Returns the page data ref object of current page.
+  返回当前页面数据的 Ref 对象。
 
-- Also see:
-  - [Node API > Page Properties > data](./node-api.md#data)
-  - [Plugin API > extendsPage](./plugin-api.md#extendspage)
+- 参考：
+  - [Node API > Page 属性 > data](./node-api.md#data)
+  - [插件 API > extendsPage](./plugin-api.md#extendspage)
 
 ### usePageFrontmatter
 
-- Details:
+- 详情：
 
-  Returns the frontmatter ref object of current page.
+  返回当前页面 Frontmatter 的 Ref 对象。
 
-  The value is the `frontmatter` property of the page data.
+  它的值是页面数据的 `frontmatter` 属性。
 
 ### usePageHead
 
-- Details:
+- 详情：
 
-  Returns the head config ref object of current page.
+  返回当前页面 Head 配置的 Ref 对象。
 
-  The value is obtained by merging and deduplicating [head](./frontmatter.md#head) frontmatter and [head](./config.md#head) config.
+  它的值是合并 [head](./frontmatter.md#head) Frontmatter 和 [head](./config.md#head) 配置，并进行去重后得到的。
 
 ### usePageHeadTitle
 
-- Details:
+- 详情：
 
-  Returns the head title ref object of current page.
+  返回当前页面 Head 中的标题的 Ref 对象。
 
-  The value is obtained by joining the page title and site title.
+  它的值是连接页面标题和站点标题后得到的。
 
 ### usePageLang
 
-- Details:
+- 详情：
 
-  Returns the language ref object of current page.
+  返回当前页面语言的 Ref 对象。
 
-  The value is the `lang` property of the page data.
+  它的值是页面数据的 `lang` 属性。
 
-## useRoutes
+### useRoutes
 
-- Details:
+- 详情：
 
-  Returns the routes ref object.
+  返回所有路由的 Ref 对象。
 
-  The value is the `routes` property of the site data.
+  它的值是站点数据的路由信息。
 
-- Also see:
-  - [Advanced > Cookbook > Resolving Routes](../advanced/cookbook/resolving-routes.md)
+- 参考：
+  - [深入 > Cookbook > 解析路由](../advanced/cookbook/resolving-routes.md)
 
 ### useRouteLocale
 
-- Details:
+- 详情：
 
-  Returns the locale path ref object of current route.
+  返回当前路由对应的 locale path 的 Ref 对象。
 
-  The value is one of the keys of the [locales](./config.md#locales) config.
+  它的值是 [locales](./config.md#locales) 配置的键之一。
 
 ### useSiteData
 
-- Details:
+- 详情：
 
-  Returns the site data ref object.
+  返回站点数据的 Ref 对象。
 
 ### useSiteLocaleData
 
-- Details:
+- 详情：
 
-  Returns the site data ref object of current locale.
+  返回当前 locale 的站点数据的 Ref 对象。
 
-  The properties of current locale have been merged into the root-level properties.
+  当前 locale 中的配置已经合并到顶层配置中。
 
-## Helpers
+## 工具函数
 
 ### defineClientConfig
 
-- Details:
+- 详情：
 
-  Helper for creating [clientConfigFile](./plugin-api.md#clientconfigfile).
+  帮助你创建 [clientConfigFile](./plugin-api.md#clientconfigfile) 的工具函数。
 
-- Also see:
-  - [Advanced > Cookbook > Usage of Client Config](../advanced/cookbook/usage-of-client-config.md)
+- 参考：
+  - [深入 > Cookbook > 客户端配置的使用方法](../advanced/cookbook/usage-of-client-config.md)
 
 ### resolveRoute
 
-- Details:
+- 详情：
 
-  Parses the route of the given link.
+  解析给定链接对应的路由
 
-- Also see:
-  - [Advanced > Cookbook > Resolving Routes](../advanced/cookbook/resolving-routes.md)
+- 参考：
+  - [深入 > Cookbook > 解析路由](../advanced/cookbook/resolving-routes.md)
 
 ## resolveRoutePath
 
-- Details:
+- 详情：
 
-  Parses the route path of the given link.
+  解析给定链接对应的路由路径
 
-- Also see:
-  - [Advanced > Cookbook > Resolving Routes](../advanced/cookbook/resolving-routes.md)
+- 参考：
+  - [深入 > Cookbook > 解析路由](../advanced/cookbook/resolving-routes.md)
 
 ### withBase
 
-- Details:
+- 详情：
 
-  Prefix URL with site [base](./config.md#base).
+  在 URL 前添加站点 [base](./config.md#base) 前缀。
 
-- Also see:
-  - [Guide > Assets > Base Helper](../guide/assets.md#base-helper)
+- 参考：
+  - [指南 > 静态资源 > Base Helper](../guide/assets.md#base-helper)
 
-## Constants
+## 常量
 
-There are some constants that available in the client side code.
+在客户端代码中有一些常量可以使用。
 
-To shim the types of these constants in client side code, add `vuepress/client-types` to your `tsconfig.json`:
+如果想要把这些常量的类型定义补充到你的代码环境中，请将 `vuepress/client-types` 添加到你的 `tsconfig.json` 里：
 
 ```json
 {
@@ -160,49 +160,49 @@ To shim the types of these constants in client side code, add `vuepress/client-t
 
 ### `__VUEPRESS_VERSION__`
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Version of VuePress core package.
+  VuePress Core 的版本号。
 
 ### `__VUEPRESS_BASE__`
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  The [base](./config.md#base) option from config.
+  配置中的 [base](./config.md#base) 字段。
 
 ### `__VUEPRESS_DEV__`
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  An environment flag indicating whether it is currently running in `dev` mode.
+  一个环境标记，用于标识当前是否运行在 `dev` 模式下。
 
 ### `__VUEPRESS_SSR__`
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  An environment flag indicating whether it is currently running in server-side-rendering (SSR) build.
+  一个环境标记，用于标识当前是否运行在服务端渲染 (SSR) 环境下。
 
-## Advanced
+## 进阶能力
 
-### resolvers <Badge text="experimental" />
+### resolvers <Badge text="实验性能力" />
 
-- Type: `Record<string, Function>`
+- 类型： `Record<string, Function>`
 
-- Details:
+- 详情：
 
-  An reactive object, methods of which determining how to resolve global computed.
+  一个响应式对象，其中的方法决定了如何获取全局计算属性。
 
-- Example:
+- 示例：
 
-Customizing the format of `<title>` in client config file:
+在客户端配置文件中自定义 `<title>` 的格式：
 
 ```ts
 import { defineClientConfig, resolvers } from 'vuepress/client'
@@ -216,5 +216,5 @@ export default defineClientConfig({
 ```
 
 ::: danger
-`resolvers` will affect the basic functionality of VuePress. Please make sure you have fully understood its purpose before modifying it.
+`resolvers` 会直接影响 VuePress 的基础功能，在修改前请确保你已充分了解其用途。
 :::

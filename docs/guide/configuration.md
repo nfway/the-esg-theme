@@ -1,27 +1,27 @@
-# Configuration
+# 配置
 
-## Config File
+## 配置文件
 
-The essential file for configuring a VuePress site is `.vuepress/config.js`, while TypeScript config file is also supported. You can use `.vuepress/config.ts` instead to get better types hint for VuePress config.
+VuePress 站点的基本配置文件是 `.vuepress/config.js` ，但也同样支持 TypeScript 配置文件。你可以使用 `.vuepress/config.ts` 来得到更好的类型提示。
 
-To be more specific, we have a convention for config file paths (in order of precedence):
+具体而言，我们对于配置文件的路径有着约定（按照优先顺序）：
 
-- In current working directory `cwd`:
+- 当前工作目录 `cwd` 下：
   - `vuepress.config.ts`
   - `vuepress.config.js`
   - `vuepress.config.mjs`
-- In source directory `sourceDir`:
+- 源文件目录 `sourceDir` 下：
   - `.vuepress/config.ts`
   - `.vuepress/config.js`
   - `.vuepress/config.mjs`
 
-You can also specify the config file via `--config` option of [CLI](../reference/cli.md):
+你也可以通过 [命令行接口](../reference/cli.md) 的 `--config` 选项来指定配置文件：
 
 ```bash
 vuepress dev docs --config my-config.ts
 ```
 
-A basic config file looks like this:
+一个基础的配置文件是这样的：
 
 ```ts
 import { viteBundler } from '@vuepress/bundler-vite'
@@ -32,42 +32,42 @@ export default defineUserConfig({
   bundler: viteBundler(),
   theme: defaultTheme(),
 
-  lang: 'en-US',
-  title: 'Hello VuePress',
-  description: 'Just playing around',
+  lang: 'zh-CN',
+  title: '你好， VuePress ！',
+  description: '这是我的第一个 VuePress 站点',
 })
 ```
 
 ::: tip
-Check out the [Config Reference](../reference/config.md) for a full list of VuePress config.
+前往 [配置参考](../reference/config.md) 查看所有 VuePress 配置。
 :::
 
-## Client Config File
+## 客户端配置文件
 
-In most cases, the config file is sufficient to configure your VuePress site. However, sometimes users may want to add some client-side code directly. To help with this, VuePress also supports a client config file:
+在大多数情况下，配置文件已经足够帮助你配置好你的 VuePress 站点。不过，有些时候用户们可能希望直接添加一些客户端代码。 VuePress 通过客户端配置文件来支持这种需求：
 
 ```
 ├─ docs
 │  ├─ .vuepress
-│  │  ├─ client.js   <--- client config file
-│  │  └─ config.js   <--- config file
+│  │  ├─ client.js   <--- 客户端配置文件
+│  │  └─ config.js   <--- 配置文件
 │  └─ README.md
 ├─ .gitignore
 └─ package.json
 ```
 
-Similarly, we also have a convention for client config file paths (in order of precedence):
+同样的，我们也有关于客户端配置文件的路径约定（按照优先顺序）：
 
-- In current working directory `cwd`:
+- 当前工作目录 `cwd` 下：
   - `vuepress.client.ts`
   - `vuepress.client.js`
   - `vuepress.client.mjs`
-- In source directory `sourceDir`:
+- 源文件目录 `sourceDir` 下：
   - `.vuepress/client.ts`
   - `.vuepress/client.js`
   - `.vuepress/client.mjs`
 
-A basic client config file looks like this:
+一个基础的客户端配置文件是这样的：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
@@ -80,7 +80,7 @@ export default defineClientConfig({
 ```
 
 ::: tip
-Unlike config file, client config file could not be specified via CLI options.
+和配置文件不同，客户端配置文件不能通过命令行接口的选项来指定。
 
-To learn more about client config file, see [Advanced > Cookbook > Usage of Client Config](../advanced/cookbook/usage-of-client-config.md)
+可以前往 [深入 > Cookbook > 客户端配置的使用方法](../advanced/cookbook/usage-of-client-config.md) 来了解更多信息。
 :::

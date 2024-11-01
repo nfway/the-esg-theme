@@ -1,12 +1,12 @@
-# Plugin
+# 插件
 
-With the help of [Plugin API](../reference/plugin-api.md), VuePress plugin can provide different features for you.
+借助于 [插件 API](../reference/plugin-api.md) ， VuePress 插件可以为你提供各种不同的功能。
 
-## Official Plugin
+## 官方插件
 
-VuePress team provides some official plugins.
+VuePress 团队提供了一些官方插件。
 
-You need to import and use them in your config file via the [plugins](../reference/config.md#plugins) option. For example, use the [@vuepress/plugin-google-analytics](https://ecosystem.vuejs.press/plugins/analytics/google-analytics.html) to integrate Google Analytics:
+你需要在你的配置文件中通过 [plugins](../reference/config.md#plugins) 配置项来使用它们。举例来说，你可以使用 [@vuepress/plugin-google-analytics](https://ecosystem.vuejs.press/zh/plugins/analytics/google-analytics.html) 来使用 Google Analytics ：
 
 ```ts
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
@@ -21,24 +21,24 @@ export default {
 ```
 
 ::: tip
-Most plugins can only be used once. If the same plugin is used multiple times, only the last one will take effect.
+大部分插件只能使用一次，如果同一个插件被多次使用，那么只有最后一次会生效。
 
-However, some plugins can be used multiple times (e.g. [@vuepress/plugin-container](https://ecosystem.vuejs.press/plugins/container.html)), and you should check the documentation of the plugin itself for detailed guide.
+然而，部分插件是可以被多次使用的（例如 [@vuepress/plugin-container](https://ecosystem.vuejs.press/zh/plugins/container.html)），你应该查看插件本身的文档来获取详细指引。
 :::
 
-## Community Plugin
+## 社区插件
 
-Community users have created lots of plugins and published them to [NPM](https://www.npmjs.com/search?q=keywords:vuepress-plugin). You should check the plugin's own documentation for detailed guide.
+社区用户创建了很多插件，并将它们发布到了 [NPM](https://www.npmjs.com/search?q=keywords:vuepress-plugin) 上。 查看插件本身的文档可以获取更详细的指引。
 
-You can explore more plugins in [VuePress Marketplace](https://marketplace.vuejs.press/plugins/).
+你可以在 [VuePress 市场](https://marketplace.vuejs.press/zh/plugins/) 中探索更多插件。
 
-## Local Plugin
+## 本地插件
 
-If you want to use your own plugin but don't want to publish it, you can create a local plugin.
+如果你想要使用自己的插件，但是又不想发布它，你可以创建一个本地插件。
 
-It is recommended to use the [Config File](./configuration.md#config-file) directly as a plugin, because [almost all of the Plugin APIs are available](../reference/config.md#plugin-api), which would be more convenient in most cases.
+我们推荐你直接将 [配置文件](./configuration.md#配置文件) 作为插件使用，因为 [几乎所有的插件 API 都可以在配置文件中使用](../reference/config.md#插件-api)，这在绝大多数场景下都更为方便。
 
-But if you have too many things to do in your config file, you can consider to extract them into separate plugins, and use them in your config file:
+但是如果你在配置文件中要做的事情太多了，你可以考虑将它们提取到单独的插件中，然后在你的配置文件中使用它们：
 
 ```ts
 import myPlugin from './path/to/my-plugin.js'
@@ -48,4 +48,4 @@ export default {
 }
 ```
 
-You can refer to [Advanced > Writing a Plugin](../advanced/plugin.md) for how to write your own plugin.
+前往 [深入 > 开发插件](../advanced/plugin.md) 学习如何开发你自己的插件。

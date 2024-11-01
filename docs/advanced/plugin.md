@@ -1,12 +1,12 @@
-# Writing a Plugin
+# 开发插件
 
 ::: tip
-Before reading this guide, you'd better learn the VuePress [architecture](./architecture.md) first.
+在阅读该指南之前，你最好先了解一下 VuePress 的 [架构](./architecture.md) 。
 :::
 
-## Create a Plugin
+## 创建一个插件
 
-A plugin should be a plain JavaScript object that satisfies the [Plugin API](../reference/plugin-api.md), which is called a _Plugin Object_:
+插件是一个符合 [插件 API](../reference/plugin-api.md) 的普通 JavaScript 对象，称之为 _插件对象_ ：
 
 ```ts
 const fooPlugin = {
@@ -15,7 +15,7 @@ const fooPlugin = {
 }
 ```
 
-A plugin could also be a function that receives the [app instance](../reference/node-api.md#app) as the param and returns a _Plugin Object_, which is called a _Plugin Function_:
+插件还可以是一个接收 [App 实例](../reference/node-api.md#app) 作为参数，且返回值为 _插件对象_ 的函数，称之为 _插件函数_ ：
 
 ```ts
 const barPlugin = (app) => ({
@@ -24,7 +24,7 @@ const barPlugin = (app) => ({
 })
 ```
 
-A plugin usually needs to allow user options, so we typically provide users with a function to receive options, and returns a _Plugin Object_ or a _Plugin Function_. Then your plugin should be converted like this:
+插件通常需要允许用户传入配置，因此我们一般都会提供给用户一个函数来接收配置，然后将 _插件对象_ 或者 _插件函数_ 作为返回值。于是，你的插件应该转换成这样的形式：
 
 ```ts
 const fooPlugin = (options) => ({
@@ -38,9 +38,9 @@ const barPlugin = (options) => (app) => ({
 })
 ```
 
-## Publish to NPM
+## 发布到 NPM
 
-After creating a plugin, you should follow some conventions in the [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json) file before publishing it to NPM:
+在创建了插件之后，你需要在 [package.json](https://docs.npmjs.com/cli/v8/configuring-npm/package-json) 文件中遵循一定的约定，然后再将其发布到 NPM 上：
 
 ```json
 {
@@ -49,5 +49,5 @@ After creating a plugin, you should follow some conventions in the [package.json
 }
 ```
 
-- Set `name` to follow the naming convention, i.e. `vuepress-plugin-xxx` or `@org/vuepress-plugin-xxx`, which should be consistent with the [name](../reference/plugin-api.md#name) field of the _Plugin Object_.
-- Set `keywords` to include `vuepress-plugin`, so that users can search your plugin on NPM.
+- 将 `name` 按照约定命名，即 `vuepress-plugin-xxx` 或 `@org/vuepress-plugin-xxx` ，它应该和 _插件对象_ 的 [name](../reference/plugin-api.md#name) 字段保持一致。
+- 在 `keywords` 中包含 `vuepress-plugin` ，这样用户可以在 NPM 上搜索到你的插件。

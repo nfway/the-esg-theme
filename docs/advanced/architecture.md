@@ -1,36 +1,36 @@
-# Architecture
+# 架构
 
-## Overview
+## 概览
 
 ![vuepress-architecture-overview](/images/guide/vuepress-architecture-overview.png)
 
-The above figure shows a brief overview of the VuePress architecture:
+上图展示了 VuePress 的简要架构：
 
-- Node App will generate temp files, including the pages, routes, etc.
-- Bundler will handle Client App together with the temp files, just like a common Vue app.
+- Node App 会生成临时文件，包括页面、路由等。
+- Bundler 会将 Client App 和临时文件一起进行打包，就像处理一个普通的 Vue App 一样。
 
-As a developer, you must be aware of that VuePress has two main parts: **Node App** and **Client App**, which is important when developing plugins and themes:
+作为开发者，你必须要意识到 VuePress 分为两个主要部分： **Node App** 和 **Client App** ，这一点对于开发插件和主题来说都十分重要。
 
-- The entry file of a plugin or a theme will be loaded in Node App.
-- Client files will be loaded in Client App, which will be handled by bundler. For example, components, client config files, etc.
+- 插件或者主题的入口文件会在 Node App 中被加载。
+- 客户端文件会在 Client App 中被加载，也就是会被 Bundler 处理。比如组件、客户端配置文件等。
 
-## Core Process and Hooks
+## 核心流程与 Hooks
 
 ![vuepress-core-process](/images/guide/vuepress-core-process.png)
 
-The above figure shows the core process of VuePress Node App and the hooks of [Plugin API](../reference/plugin-api.md):
+上图展示了 VuePress 的核心流程以及 [插件 API](../reference/plugin-api.md) 的 Hooks ：
 
-- In the **init** stage:
-  - Theme and plugins will be loaded. That means all the plugins should be used before initialization.
-  - As we are using markdown-it to parse the markdown file, so we need to create markdown-it instance before loading pages:
-    - [extendsMarkdownOptions](../reference/plugin-api.md#extendsmarkdownoptions) hook will be processed to create markdown-it instance.
-    - [extendsMarkdown](../reference/plugin-api.md#extendsmarkdown) hook will be processed extends markdown-it instance.
-  - Page files will be loaded:
-    - [extendsPageOptions](../reference/plugin-api.md#extendspageoptions) hook will be processed to create pages.
-    - [extendsPage](../reference/plugin-api.md#extendspage) hook will be processed to extends page object.
-- In the **prepare** stage:
-  - Temp files will be generated, so all hooks related to client files will be processed here.
-- In the **dev / build** stage:
-  - Bundler will be resolved:
-    - [extendsBundlerOptions](../reference/plugin-api.md#extendsbundleroptions) hook will be processed to create bundler configuration.
-    - [alias](../reference/plugin-api.md#alias) hook and [define](../reference/plugin-api.md#define) hook would be used in bundler configuration, so they will be processed here.
+- 在 **init** 阶段：
+  - 主题和插件会被加载。这意味着插件需要在初始化之前使用。
+  - 由于我们要使用 markdown-it 来解析 Markdown 文件，因此需要在加载页面文件之前创建 markdown-it 实例：
+    - [extendsMarkdownOptions](../reference/plugin-api.md#extendsmarkdownoptions) Hook 会被调用，用以创建 markdown-it 实例。
+    - [extendsMarkdown](../reference/plugin-api.md#extendsmarkdown) Hook 会被调用，用以扩展 markdown-it 实例。
+  - 页面文件会被加载：
+    - [extendsPageOptions](../reference/plugin-api.md#extendspageoptions) Hook 会被调用，用以创建页面。
+    - [extendsPage](../reference/plugin-api.md#extendspage) Hook 会被调用，用以扩展页面对象。
+- 在 **prepare** 阶段：
+  - 临时文件会被生成，因此所有和客户端文件相关的 Hooks 会在此处调用。
+- 在 **dev / build** 阶段：
+  - Bundler 会被加载：
+    - [extendsBundlerOptions](../reference/plugin-api.md#extendsbundleroptions) Hook 会被调用，用以生成 Bundler 的配置。
+    - [alias](../reference/plugin-api.md#alias) Hook 和 [define](../reference/plugin-api.md#define) Hook 会被用在 Bundler 的配置中，所以它们会在此处调用。

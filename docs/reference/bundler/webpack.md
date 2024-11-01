@@ -2,17 +2,17 @@
 
 <NpmBadge package="@vuepress/bundler-webpack" />
 
-Webpack bundler is provided by [@vuepress/bundler-webpack](https://www.npmjs.com/package/@vuepress/bundler-webpack) package.
+Webpack 打包工具是由 [@vuepress/bundler-webpack](https://www.npmjs.com/package/@vuepress/bundler-webpack) 包提供的。
 
-## Usage
+## 使用方法
 
-Install the bundler package:
+安装打包工具：
 
 ```bash
 npm i -D @vuepress/bundler-webpack@next
 ```
 
-Specify the bundler option in your config file:
+在配置文件中指定打包工具：
 
 ```ts title=".vuepress/config.ts"
 import { webpackBundler } from '@vuepress/bundler-webpack'
@@ -26,123 +26,123 @@ export default defineUserConfig({
 })
 ```
 
-## Options
+## 配置项
 
 ### configureWebpack
 
-- Type: `(config: WebpackConfiguration, isServer: boolean, isBuild: boolean) => WebpackConfiguration | void`
+- 类型： `(config: WebpackConfiguration, isServer: boolean, isBuild: boolean) => WebpackConfiguration | void`
 
-- Details:
+- 详情：
 
-  Edit the internal webpack config.
+  用于修改内部的 Webpack 配置。
 
-  This option accepts a function that will receive a webpack config object as the 1st argument, an `isServer` flag as the 2nd argument and an `isBuild` flag as the 3rd argument. You can either mutate the config directly, or return an object to be merged by [webpack-merge](https://github.com/survivejs/webpack-merge).
+  该配置项接收一个函数，该函数的第一个参数是 Webpack 配置对象，第二个参数是 `isServer` 标志位，第三个参数是 `isBuild` 标志位。
 
 ### chainWebpack
 
-- Type: `(config: WebpackChainConfig, isServer: boolean, isBuild: boolean) => void`
+- 类型： `(config: WebpackChainConfig, isServer: boolean, isBuild: boolean) => void`
 
-- Details:
+- 详情：
 
-  Edit the internal webpack config with [webpack-chain](https://github.com/mozilla-neutrino/webpack-chain).
+  通过 [webpack-chain](https://github.com/mozilla-neutrino/webpack-chain) 来修改内部的 Webpack 配置。
 
-  This option accepts a function that will receive a `Config` instance that provided by `webpack-chain` as the 1st argument an `isServer` flag as the 2nd argument and an `isBuild` flag as the 3rd argument.
+  该配置项接收一个函数，该函数的第一个参数是由 `webpack-chain` 提供的 `Config` 实例，第二个参数是 `isServer` 标志位，第三个参数是 `isBuild` 标志位。
 
 ### devServerSetupMiddlewares
 
-- Type: `(middlewares: Middleware[], devServer: Server) => Middleware[]`
+- 类型： `(middlewares: Middleware[], devServer: Server) => Middleware[]`
 
-- Details:
+- 详情：
 
-  A hook to be called in `devServer.setupMiddlewares` of webpack.
+  在 Webpack 的 `devServer.setupMiddlewares` 中调用的 Hook 。
 
-  The arguments of the function are those of `devServer.setupMiddlewares`.
+  函数的参数即是 `devServer.setupMiddlewares` 的参数。
 
-- Also see:
+- 参考：
   - [Webpack > Configuration > DevServer > devServer.setupMiddlewares](https://webpack.js.org/configuration/dev-server/#devserversetupmiddlewares)
 
 ### vue
 
-- Type: `VueLoaderOptions`
+- 类型： `VueLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `vue-loader`.
+  `vue-loader` 的配置项。
 
-- Also see:
-  - [vue-loader > Options Reference](https://vue-loader.vuejs.org/options.html)
+- 参考：
+  - [vue-loader > 选项参考](https://vue-loader.vuejs.org/zh/options.html)
 
 ### postcss
 
-- Type: `PostcssLoaderOptions`
+- 类型： `PostcssLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `postcss-loader`.
+  `postcss-loader` 的配置项。
 
-- Also see:
+- 参考：
   - [postcss-loader > Options](https://github.com/webpack-contrib/postcss-loader#options)
 
 ### stylus
 
-- Type: `StylusLoaderOptions`
+- 类型： `StylusLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `stylus-loader`.
+  `stylus-loader` 的配置项。
 
-- Also see:
+- 参考：
   - [stylus-loader > Options](https://github.com/webpack-contrib/stylus-loader#options)
 
 ### scss
 
-- Type: `SassLoaderOptions`
+- 类型： `SassLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `sass-loader` for `.scss` files.
+  针对 `.scss` 文件的 `sass-loader` 的配置项。
 
-- Also see:
+- 参考：
   - [sass-loader > Options](https://github.com/webpack-contrib/sass-loader#options)
 
 ### sass
 
-- Type: `SassLoaderOptions`
+- 类型： `SassLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `sass-loader` for `.sass` files.
+  针对 `.sass` 文件的 `sass-loader` 的配置项。
 
-- Also see:
+- 参考：
   - [sass-loader > Options](https://github.com/webpack-contrib/sass-loader#options)
 
 ### less
 
-- Type: `LessLoaderOptions`
+- 类型： `LessLoaderOptions`
 
-- Details:
+- 详情：
 
-  Options for `less-loader`.
+  `less-loader` 的配置项。
 
-- Also see:
+- 参考：
   - [less-loader > Options](https://github.com/webpack-contrib/less-loader#options)
 
 ### evergreen
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Set to `true` if you are only targeting evergreen browsers. This will disable some transpilation and polyfills, and result in faster builds and smaller files.
+  如果你的对象只有那些 “常青树” 浏览器，你可以将其设置成 `true` 。这将会禁用一些转译过程和 Polyfills ，带来更快的构建速度和更小的文件体积。
 
-## FAQ
+## 常见问题
 
-### Referencing Public Files after Changing `base`
+### 在修改 `base` 后引用 Public 文件
 
-Unlike Vite, Webpack won't handle `base` for public files automatically. So if you change the `base` of your site, you'd better to use [Base Helper](../../guide/assets.md#base-helper) when referencing an public image file.
+与 Vite 不同， Webpack 不会为 Public 文件自动处理 `base`。因此如果你修改了网站的 `base`，建议你在引用 Public 图片文件时使用 [Base Helper](../../guide/assets.md#base-helper)。
 
-### Using with Default Theme
+### 使用默认主题
 
-Default theme is using [SASS](https://sass-lang.com/) as CSS pre-processor, so you might need to install [sass-loader](https://www.npmjs.com/package/sass-loader) as a peer dependency to make it work with Webpack, especially when you are using [pnpm](https://pnpm.io/).
+默认主题使用 [SASS](https://sass-lang.com/) 作为 CSS 预处理器，因此你在使用 Webpack 时（特别是在使用 [pnpm](https://pnpm.io/) 时）可能需要手动安装 [sass-loader](https://www.npmjs.com/package/sass-loader) 来确保其正常工作。

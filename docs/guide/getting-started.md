@@ -1,32 +1,32 @@
-# Getting Started
+# 快速上手
 
 ::: warning
-VuePress v2 is currently in RC (Release Candidate) stage. It's ready to be used for building your site, but the config and API are not stable enough, which is possibly to have minor breaking changes. So make sure to read the [changelog](https://github.com/vuepress/core/blob/main/CHANGELOG.md) carefully each time you upgrade a RC version.
+VuePress v2 目前仍处于 RC (Release Candidate) 阶段。你已经可以用它来构建你的站点，但是它的配置和 API 还不够稳定，有可能会发生一些微小的 Breaking Changes 。因此，在每次更新 RC 版本之后，请一定要仔细阅读 [更新日志](https://github.com/vuepress/core/blob/main/CHANGELOG.md)。
 :::
 
-## Try It Online
+## 在线试一试
 
-You can try VuePress directly in your browser on [StackBlitz](https://stackblitz.com/fork/vuepress).
+你可以通过 [StackBlitz](https://stackblitz.com/fork/vuepress) 在你的浏览器里直接使用 VuePress 。
 
-## Installation
+## 安装
 
-### Prerequisites
+### 依赖环境
 
 - [Node.js v18.19.0+](https://nodejs.org/)
-- Package manager like [pnpm](https://pnpm.io), [yarn](https://classic.yarnpkg.com/en/), [npm](https://www.npmjs.com), etc.
+- 包管理器，如 [pnpm](https://pnpm.io/zh/)、[yarn](https://classic.yarnpkg.com/en/)、[npm](https://www.npmjs.com/) 等。
 
 ::: tip
 
-- When using [pnpm](https://pnpm.io/), you need to install `vue` as peer-dependencies.
-- When using [yarn 2+](https://yarnpkg.com/), you need to set `nodeLinker: 'node-modules'` in your [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) file.
+- 使用 [pnpm](https://pnpm.io/zh/) 时，你需要安装 `vue` 作为 peer-dependencies 。
+- 使用 [yarn 2+](https://yarnpkg.com/) 时，你需要在 [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) 文件中设置 `nodeLinker: 'node-modules'` 。
 
 :::
 
-### Project Setup
+### 创建项目
 
-#### Setup via CLI
+#### 通过命令行创建
 
-You can use [create-vuepress](https://www.npmjs.com/package/create-vuepress) to generate a template directly.
+你可以通过 [create-vuepress](https://www.npmjs.com/package/create-vuepress) 直接创建项目模板。
 
 ::: code-tabs#shell
 
@@ -50,18 +50,18 @@ npm init vuepress vuepress-starter
 
 :::
 
-#### Setup Manually
+#### 手动创建
 
-This section will help you build a basic VuePress documentation site from ground up.
+这一章节会帮助你从头搭建一个简单的 VuePress 文档网站。
 
-- Create and change into a new directory
+- 创建并进入一个新目录
 
 ```bash
 mkdir vuepress-starter
 cd vuepress-starter
 ```
 
-- Initialize your project
+- 初始化项目
 
 ::: code-tabs#shell
 
@@ -88,47 +88,47 @@ npm init
 
 :::
 
-- Install VuePress
+- 安装 VuePress
 
 ::: code-tabs#shell
 
 @tab pnpm
 
 ```bash
-# install vuepress and vue
+# 安装 vuepress 和 vue
 pnpm add -D vuepress@next vue
-# install bundler and theme
+# 安装打包工具和主题
 pnpm add -D @vuepress/bundler-vite@next @vuepress/theme-default@next
 ```
 
 @tab yarn
 
 ```bash
-# install vuepress
+# 安装 vuepress
 yarn add -D vuepress@next
-# install bundler and theme
+# 安装打包工具和主题
 yarn add -D @vuepress/bundler-vite@next @vuepress/theme-default@next
 ```
 
 @tab npm
 
 ```bash
-# install vuepress
+# 安装 vuepress
 npm install -D vuepress@next
-# install bundler and theme
+# 安装打包工具和主题
 npm install -D @vuepress/bundler-vite@next @vuepress/theme-default@next
 ```
 
 :::
 
-- Create `docs` directory and `docs/.vuepress` directory
+- 创建 `docs` 目录和 `docs/.vuepress` 目录
 
 ```bash
 mkdir docs
 mkdir docs/.vuepress
 ```
 
-- Create the VuePress config file `docs/.vuepress/config.js`
+- 创建 VuePress 配置文件 `docs/.vuepress/config.js`
 
 ```ts
 import { viteBundler } from '@vuepress/bundler-vite'
@@ -141,15 +141,15 @@ export default defineUserConfig({
 })
 ```
 
-- Create your first document
+- 创建你的第一篇文档
 
 ```bash
 echo '# Hello VuePress' > docs/README.md
 ```
 
-## Directory Structure
+## 目录结构
 
-After the setup, the minimal structure of your project should look like this:
+创建完成后，你项目的目录结构应该是这样的：
 
 ```
 ├─ docs
@@ -159,28 +159,28 @@ After the setup, the minimal structure of your project should look like this:
 └─ package.json
 ```
 
-The `docs` directory is where you put your markdown files, and it will be used as the source directory of VuePress.
+`docs` 目录是你放置 Markdown 文件的地方，它同时也会作为 VuePress 的源文件目录。
 
-The `docs/.vuepress` directory, i.e. the `.vuepress` directory in the source directory, is where all VuePress-specific files will be placed. Currently there is only one config file in it. By default, the temp, cache and output directory will also be generated inside this directory. It is suggested to add them to your `.gitignore` file.
+`docs/.vuepress` 目录，即源文件目录下的 `.vuepress` 目录，是放置所有和 VuePress 相关的文件的地方。当前这里只有一个配置文件。默认还会在该目录下生成临时文件、缓存文件和构建输出文件。建议你把它们添加到 `.gitignore` 文件中。
 
-::: details Example `.gitignore` file
+::: details 示例 `.gitignore` 文件
 
 ```
-# VuePress default temp directory
+# VuePress 默认临时文件目录
 .vuepress/.temp
-# VuePress default cache directory
+# VuePress 默认缓存目录
 .vuepress/.cache
-# VuePress default build output directory
+# VuePress 默认构建生成的静态文件目录
 .vuepress/dist
 ```
 
 :::
 
-## Work with VuePress
+## 开始使用 VuePress
 
-### Start Dev Server
+### 启动开发服务器
 
-You can add some [scripts](https://classic.yarnpkg.com/en/docs/package-json#toc-scripts) to `package.json`:
+你可以在 `package.json` 中添加一些 [scripts](https://classic.yarnpkg.com/zh-Hans/docs/package-json#toc-scripts) ：
 
 ```json
 {
@@ -191,7 +191,7 @@ You can add some [scripts](https://classic.yarnpkg.com/en/docs/package-json#toc-
 }
 ```
 
-Then, run `docs:dev` script to start the dev server:
+运行 `docs:dev` 脚本可以启动开发服务器:
 
 ::: code-tabs#shell
 
@@ -215,11 +215,11 @@ npm run docs:dev
 
 :::
 
-VuePress will start a hot-reloading development server at [http://localhost:8080](http://localhost:8080). When you modify your markdown files, the content in the browser will be auto updated.
+VuePress 会在 [http://localhost:8080](http://localhost:8080) 启动一个热重载的开发服务器。当你修改你的 Markdown 文件时，浏览器中的内容也会自动更新。
 
-### Build Your Site
+### 构建你的网站
 
-To build your site, run `docs:build` script:
+运行 `docs:build` 脚本可以构建你的网站：
 
 ::: code-tabs#shell
 
@@ -243,10 +243,10 @@ npm run docs:build
 
 :::
 
-You will see the generated static files in the `docs/.vuepress/dist` directory. You can check out [deployment](./deployment.md) for how to deploy them.
+在 `docs/.vuepress/dist` 目录中可以找到构建生成的静态文件。你可以查看 [部署](./deployment.md) 来了解如何部署你的网站。
 
-## Learn More about VuePress
+## 进一步了解 VuePress
 
-By now, you should have a basic but functional VuePress site. But you may still need to read the subsequent guide to learn more about VuePress.
+现在，你应该已经有了一个简单可用的 VuePress 网站。但你可能仍需要阅读后续的指南来更加了解 VuePress 。
 
-Next step, learn more about the [configuration](./configuration.md).
+下一步，前往 [配置](./configuration.md) 了解更多配置文件相关的内容。

@@ -1,10 +1,10 @@
-# Introduction
+# 介绍
 
-## What's the Cookbook for?
+## Cookbook 的目的是什么？
 
-- We are introducing essential concepts in the **Guide**, but you may not know how to dig deeper.
-- We are listing APIs in the **Reference**, but you may not know how to take full advantage of them.
+- 我们在 **指南** 中介绍了基本概念，但你可能不知道怎么才能了解得更深入。
+- 我们在 **参考** 中列出了 API ，但你可能不知道如何充分利用它们。
 
-So here comes the Cookbook.
+于是就有了 Cookbook 。
 
-Each recipe will focus on one specific aspect, providing more detailed examples to show you the usages and possibilities of VuePress.
+每个案例都会针对某个特定的方面，通过提供更详细的示例来向你展示 VuePress 的用法和其他可能性。

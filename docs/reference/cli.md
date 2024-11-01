@@ -1,6 +1,6 @@
-# Command Line Interface
+# 命令行接口
 
-Run `vuepress --help` to get following help messages:
+执行 `vuepress --help` 来获取下列帮助信息：
 
 ```
 Usage:
@@ -22,14 +22,14 @@ Options:
 ```
 
 ::: tip
-VuePress is using [debug](https://www.npmjs.com/package/debug) module.
+VuePress 使用了 [debug](https://www.npmjs.com/package/debug) 模块。
 
-Set environment variable `DEBUG=vuepress*` to enable debug logs.
+设置环境变量 `DEBUG=vuepress*` 可以启用调试日志。
 :::
 
 ## dev
 
-Start a development server to develop your VuePress site locally.
+启动一个开发服务器，在本地开发你的 VuePress 站点。
 
 ```
 Usage:
@@ -51,12 +51,12 @@ Options:
 ```
 
 ::: tip
-Options set by CLI will override those options with the same name in your config file.
+通过命令行设置的配置项，会覆盖你配置文件中的同名配置项。
 :::
 
 ## build
 
-Build your VuePress site to static files, which are ready for [deployment](../guide/deployment.md).
+将你的 VuePress 站点构建成静态文件，以便你进行后续[部署](../guide/deployment.md)。
 
 ```
 Usage:
@@ -75,11 +75,11 @@ Options:
 ```
 
 ::: tip
-Options set by CLI will override those options with the same name in your config file.
+通过命令行设置的配置项，会覆盖你配置文件中的同名配置项。
 :::
 
 ## info
 
-Outputs information about your system and dependencies.
+输出当前系统和依赖相关的信息。
 
-This command would be helpful when you want to check your environment or report an issue.
+在你想要检查你的环境，或者提交 Issue 时候，可以使用该命令。
