@@ -76,7 +76,7 @@ export default defineUserConfig({
         // sidebar
         sidebar: sidebarZh,
         // page meta
-       // editLinkText: '在 GitHub 上编辑此页',
+        // editLinkText: '在 GitHub 上编辑此页',
         //lastUpdatedText: '上次更新',
         //contributorsText: '贡献者',
         // custom containers
@@ -128,15 +128,13 @@ export default defineUserConfig({
 
   // use plugins
   plugins: [
-  
-   searchPlugin({
+    searchPlugin({
       locales: {
         '/': {
-         placeholder: "搜索",
+          placeholder: "搜索",
         },
       },
     }),
-    ],
     googleAnalyticsPlugin({
       // we have multiple deployments, which would use different id
       id: process.env.DOCS_GA_ID ?? '',
@@ -145,11 +143,11 @@ export default defineUserConfig({
       componentsDir: path.resolve(__dirname, './components'),
     }),
     // only enable shiki plugin in production mode
-    isProd
-      ? shikiPlugin({
+    ...(isProd
+      ? [shikiPlugin({
           langs: ['bash', 'diff', 'json', 'md', 'ts', 'vue'],
           theme: 'dark-plus',
-        })
-      : [],
+        })]
+      : []),
   ],
 })
