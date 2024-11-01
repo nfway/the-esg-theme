@@ -11,9 +11,7 @@ import { defineUserConfig } from 'vuepress'
 import { getDirname, path } from 'vuepress/utils'
 import {
   head,
-  navbarEn,
   navbarZh,
-  sidebarEn,
   sidebarZh,
 } from './configs/index.js'
 
@@ -59,9 +57,9 @@ export default defineUserConfig({
        */
       '/': {
         // navbar
-        navbar: navbarEn,
+        navbar: navbarZh,
         // sidebar
-        sidebar: sidebarEn,
+        sidebar: sidebarZh,
         // page meta
         editLinkText: 'Edit this page on GitHub',
       },
