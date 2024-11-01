@@ -3,7 +3,7 @@ import process from 'node:process'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { webpackBundler } from '@vuepress/bundler-webpack'
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
-import { searchProPlugin } from "vuepress-plugin-search-pro"
+//import { searchProPlugin } from "vuepress-plugin-search-pro"
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { shikiPlugin } from '@vuepress/plugin-shiki'
 import { defaultTheme } from '@vuepress/theme-default'
@@ -128,34 +128,7 @@ export default defineUserConfig({
 
   // use plugins
   plugins: [
-    searchProPlugin({
-      indexContent: true,
-      autoSuggestions: true,
-      customFields: [
-        {
-          getter: (page) => page.frontmatter.category,
-          formatter: {
-            "/": "Category: $content",
-            "/zh/": "分类：$content"
-          }
-        },
-        {
-          getter: (page) => page.frontmatter.tag,
-          formatter: {
-            "/": "Tag: $content",
-            "/zh/": "标签：$content"
-          }
-        }
-      ],
-      hotKeys: [
-        { key: 'k', ctrl: true },
-        { key: '/', ctrl: true }
-      ],
-      queryHistoryCount: 5,
-      resultHistoryCount: 5,
-      searchDelay: 150,
-      sortStrategy: "max"
-    }),
+ 
     googleAnalyticsPlugin({
       // we have multiple deployments, which would use different id
       id: process.env.DOCS_GA_ID ?? '',
