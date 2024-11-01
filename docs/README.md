@@ -4,11 +4,11 @@ title: 首页
 heroImage: /images/hero.png
 actions:
   - text: 快速上手
-    link: /zh/guide/getting-started.html
+    link: /guide/getting-started.html
     type: primary
 
   - text: 项目简介
-    link: /zh/guide/introduction.html
+    link: /guide/introduction.html
     type: secondary
 
 features:

@@ -566,7 +566,7 @@ interface MarkdownLink {
 
   - `'/'`
   - `'/en/'`
-  - `'/zh/'`
+  - `'/'`
 
 - 参考：
   - [配置 > locales](./config.md#locales)

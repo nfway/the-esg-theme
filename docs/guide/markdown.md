@@ -56,8 +56,8 @@ VuePress 会使用 [markdown-it](https://github.com/markdown-it/markdown-it) 来
 
 <!-- 绝对路径 -->
 
-[指南 > 介绍](/zh/guide/introduction.md)  
-[配置参考 > markdown.links](/zh/reference/config.md#links)
+[指南 > 介绍](/guide/introduction.md)  
+[配置参考 > markdown.links](/reference/config.md#links)
 
 <!-- URL -->
 
@@ -68,11 +68,11 @@ VuePress 会使用 [markdown-it](https://github.com/markdown-it/markdown-it) 来
 
 ```vue
 <template>
-  <RouteLink to="/zh/">首页</RouteLink>
-  <RouteLink to="/zh/reference/config.html">配置参考</RouteLink>
-  <RouteLink to="/zh/guide/getting-started.html">快速上手</RouteLink>
-  <RouteLink to="/zh/guide/introduction.html">指南 &gt; 介绍</RouteLink>
-  <RouteLink to="/zh/reference/config.html#links">
+  <RouteLink to="/">首页</RouteLink>
+  <RouteLink to="/reference/config.html">配置参考</RouteLink>
+  <RouteLink to="/guide/getting-started.html">快速上手</RouteLink>
+  <RouteLink to="/guide/introduction.html">指南 &gt; 介绍</RouteLink>
+  <RouteLink to="/reference/config.html#links">
     配置参考 &gt; markdown.links
   </RouteLink>
   <a href="https://github.com" target="_blank" rel="noopener noreferrer">
@@ -86,8 +86,8 @@ VuePress 会使用 [markdown-it](https://github.com/markdown-it/markdown-it) 来
 [首页](../README.md)  
 [配置参考](../reference/config.md)  
 [快速上手](./getting-started.md)  
-[指南 > 介绍](/zh/guide/introduction.md)  
-[配置参考 > markdown.links](/zh/reference/config.md#links)  
+[指南 > 介绍](/guide/introduction.md)  
+[配置参考 > markdown.links](/reference/config.md#links)  
 [GitHub](https://github.com)
 
 **解释**
@@ -247,7 +247,7 @@ export default defineUserConfig({
 
 行高亮扩展是通过高亮器插件默认支持的。
 
-配置参考：[prism 行高亮](https://ecosystem.vuejs.press/zh/plugins/markdown/prismjs.html#highlightlines) 和 [shiki 行高亮](https://ecosystem.vuejs.press/zh/plugins/markdown/shiki.html#highlightlines)
+配置参考：[prism 行高亮](https://ecosystem.vuejs.press/plugins/markdown/prismjs.html#highlightlines) 和 [shiki 行高亮](https://ecosystem.vuejs.press/plugins/markdown/shiki.html#highlightlines)
 
 :::
 
@@ -291,7 +291,7 @@ const line3 = 'This is line 3'
 
 行号扩展是通过高亮器插件默认支持的。
 
-配置参考：[prism 行号](https://ecosystem.vuejs.press/zh/plugins/markdown/prismjs.html#linenumbers) 和 [shiki 行号](https://ecosystem.vuejs.press/zh/plugins/markdown/shiki.html#linenumbers)
+配置参考：[prism 行号](https://ecosystem.vuejs.press/plugins/markdown/prismjs.html#linenumbers) 和 [shiki 行号](https://ecosystem.vuejs.press/plugins/markdown/shiki.html#linenumbers)
 
 :::
 
@@ -484,12 +484,12 @@ export default {
 ::: tip
 前往 [内置组件](../reference/components.md) 查看所有内置组件。
 
-前往 [默认主题 > 内置组件](https://ecosystem.vuejs.press/zh/themes/default/components.html) 查看默认主题中的所有内置组件。
+前往 [默认主题 > 内置组件](https://ecosystem.vuejs.press/themes/default/components.html) 查看默认主题中的所有内置组件。
 :::
 
 ## Markdown 插件
 
-你可以在 [VuePress 市场](https://marketplace.vuejs.press/zh/plugins/markdown.html) 上探索更多的 Markdown 插件。
+你可以在 [VuePress 市场](https://marketplace.vuejs.press/plugins/markdown.html) 上探索更多的 Markdown 插件。
 
 ## 注意事项
 
@@ -507,5 +507,5 @@ export default {
   - 对于 `@vuepress/bundler-webpack` ，设置 [vue.compilerOptions](../reference/bundler/webpack.md#vue)
   - 对于 `@vuepress/bundler-vite` ，设置 [vuePluginOptions.template.compilerOptions](../reference/bundler/vite.md#vuepluginoptions)
 
-[prismjs]: https://ecosystem.vuejs.press/zh/plugins/markdown/prismjs.html
-[shiki]: https://ecosystem.vuejs.press/zh/plugins/markdown/shiki.html
+[prismjs]: https://ecosystem.vuejs.press/plugins/markdown/prismjs.html
+[shiki]: https://ecosystem.vuejs.press/plugins/markdown/shiki.html

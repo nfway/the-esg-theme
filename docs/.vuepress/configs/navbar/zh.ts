@@ -5,19 +5,19 @@ export const navbarZh: NavbarOptions = [
   {
     text: '指南',
     children: [
-      '/zh/guide/introduction.md',
-      '/zh/guide/getting-started.md',
-      '/zh/guide/configuration.md',
-      '/zh/guide/page.md',
-      '/zh/guide/markdown.md',
-      '/zh/guide/assets.md',
-      '/zh/guide/i18n.md',
-      '/zh/guide/deployment.md',
-      '/zh/guide/theme.md',
-      '/zh/guide/plugin.md',
-      '/zh/guide/bundler.md',
-      '/zh/guide/migration.md',
-      '/zh/guide/troubleshooting.md',
+      '/guide/introduction.md',
+      '/guide/getting-started.md',
+      '/guide/configuration.md',
+      '/guide/page.md',
+      '/guide/markdown.md',
+      '/guide/assets.md',
+      '/guide/i18n.md',
+      '/guide/deployment.md',
+      '/guide/theme.md',
+      '/guide/plugin.md',
+      '/guide/bundler.md',
+      '/guide/migration.md',
+      '/guide/troubleshooting.md',
     ],
   },
   {
@@ -26,21 +26,21 @@ export const navbarZh: NavbarOptions = [
       {
         text: '核心',
         children: [
-          '/zh/reference/cli.md',
-          '/zh/reference/config.md',
-          '/zh/reference/frontmatter.md',
-          '/zh/reference/components.md',
-          '/zh/reference/plugin-api.md',
-          '/zh/reference/theme-api.md',
-          '/zh/reference/client-api.md',
-          '/zh/reference/node-api.md',
+          '/reference/cli.md',
+          '/reference/config.md',
+          '/reference/frontmatter.md',
+          '/reference/components.md',
+          '/reference/plugin-api.md',
+          '/reference/theme-api.md',
+          '/reference/client-api.md',
+          '/reference/node-api.md',
         ],
       },
       {
         text: '打包工具',
         children: [
-          '/zh/reference/bundler/vite.md',
-          '/zh/reference/bundler/webpack.md',
+          '/reference/bundler/vite.md',
+          '/reference/bundler/webpack.md',
         ],
       },
       {
@@ -48,11 +48,11 @@ export const navbarZh: NavbarOptions = [
         children: [
           {
             text: '默认主题',
-            link: 'https://ecosystem.vuejs.press/zh/themes/default/',
+            link: 'https://ecosystem.vuejs.press/themes/default/',
           },
           {
             text: '插件',
-            link: 'https://ecosystem.vuejs.press/zh/plugins/',
+            link: 'https://ecosystem.vuejs.press/plugins/',
           },
         ],
       },
@@ -64,12 +64,12 @@ export const navbarZh: NavbarOptions = [
       {
         text: '深入',
         children: [
-          '/zh/advanced/architecture.md',
-          '/zh/advanced/plugin.md',
-          '/zh/advanced/theme.md',
+          '/advanced/architecture.md',
+          '/advanced/plugin.md',
+          '/advanced/theme.md',
           {
             text: 'Cookbook',
-            link: '/zh/advanced/cookbook/',
+            link: '/advanced/cookbook/',
           },
         ],
       },
@@ -78,11 +78,11 @@ export const navbarZh: NavbarOptions = [
         children: [
           {
             text: '生态系统',
-            link: 'https://ecosystem.vuejs.press/zh/',
+            link: 'https://ecosystem.vuejs.press/',
           },
           {
             text: '市场',
-            link: 'https://marketplace.vuejs.press/zh/',
+            link: 'https://marketplace.vuejs.press/',
           },
           {
             text: '贡献指南',
@@ -101,11 +101,11 @@ export const navbarZh: NavbarOptions = [
       },
       {
         text: 'v1.x',
-        link: 'https://v1.vuepress.vuejs.org/zh/',
+        link: 'https://v1.vuepress.vuejs.org/',
       },
       {
         text: 'v0.x',
-        link: 'https://v0.vuepress.vuejs.org/zh/',
+        link: 'https://v0.vuepress.vuejs.org/',
       },
     ],
   },

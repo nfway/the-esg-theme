@@ -4,7 +4,7 @@
 
 - Markdown 源文件放置在你项目的 `docs` 目录；
 - 使用的是默认的构建输出目录 (`.vuepress/dist`) ；
-- 使用 [pnpm](https://pnpm.io/zh/) 作为包管理器，当然也支持使用 npm 或 yarn 。
+- 使用 [pnpm](https://pnpm.io/) 作为包管理器，当然也支持使用 npm 或 yarn 。
 - VuePress 作为项目依赖安装，并在 `package.json` 中配置了如下脚本：
 
 ```json

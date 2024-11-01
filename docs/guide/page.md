@@ -32,7 +32,7 @@ VuePress 是以 Markdown 为中心的。你项目中的每一个 Markdown 文件
 
 在这种情况下，你可以设置 [pagePatterns](../reference/config.md#pagepatterns) 来避免某个文件被 VuePress 处理，例如使用 `['**/*.md', '!**/README.md', '!.vuepress', '!node_modules']` 来排除所有的 `README.md` 文件。
 
-此外，一些符号如 `:` 和 `+` 可能对 vue-router 有特殊含义，因此你应该避免使用它们，请参阅 [vue-router 文档](https://router.vuejs.org/zh/guide/essentials/route-matching-syntax.html) 了解更多详情。
+此外，一些符号如 `:` 和 `+` 可能对 vue-router 有特殊含义，因此你应该避免使用它们，请参阅 [vue-router 文档](https://router.vuejs.org/guide/essentials/route-matching-syntax.html) 了解更多详情。
 :::
 
 ## Frontmatter
@@ -54,7 +54,7 @@ description: 页面的描述
 ::: tip
 前往 [Frontmatter 参考](../reference/frontmatter.md) 查看 VuePress 支持的 Frontmatter 配置。
 
-前往 [默认主题 > Frontmatter 参考](https://ecosystem.vuejs.press/zh/themes/default/frontmatter.html) 查看默认主题的 Frontmatter 配置。
+前往 [默认主题 > Frontmatter 参考](https://ecosystem.vuejs.press/themes/default/frontmatter.html) 查看默认主题的 Frontmatter 配置。
 :::
 
 ## 内容

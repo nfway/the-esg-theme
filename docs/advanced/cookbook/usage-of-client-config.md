@@ -30,7 +30,7 @@ export default defineClientConfig({
 `enhance` 函数既可以是同步的，也可以是异步的。它接收一个 Context 参数，包含以下属性：
 
 - `app` 是由 [createApp](https://staging-cn.vuejs.org/api/application.html#create-app) 创建的 Vue 应用实例。
-- `router` 是由 [createRouter](https://router.vuejs.org/zh/api/index.html#createrouter) 创建的路由实例。
+- `router` 是由 [createRouter](https://router.vuejs.org/api/index.html#createrouter) 创建的路由实例。
 - `siteData` 是一个根据用户配置生成的 Ref 对象，包含 [base](../../reference/config.md#base), [lang](../../reference/config.md#lang), [title](../../reference/config.md#title), [description](../../reference/config.md#description), [head](../../reference/config.md#head) 和 [locales](../../reference/config.md#locales)。
 
 `enhance` 函数会在客户端应用创建后被调用，你可以对 Vue 应用添加各种能力。
@@ -73,7 +73,7 @@ export default defineClientConfig({
 
 ### 使用 Router 方法
 
-你可以使用 vue-router 提供的 [Router 方法](https://router.vuejs.org/zh/api/index.html#router-方法) 。例如，添加导航钩子：
+你可以使用 vue-router 提供的 [Router 方法](https://router.vuejs.org/api/index.html#router-方法) 。例如，添加导航钩子：
 
 ```ts
 import { defineClientConfig } from 'vuepress/client'
