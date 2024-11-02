@@ -91,10 +91,12 @@ export default defineUserConfig({
     searchProPlugin({
       indexContent: true, // 启用全文索引
       autoSuggestions: true, // 启用自动建议功能
-      indexOptions: {
-        tokenize: (text, fieldName) =>
-          fieldName === "id" ? [text] : text.split(""), // 针对中文进行分词处理
-      },
+      customFields: [
+        {
+          getter: ({ frontmatter }): string[] => frontmatter["tag"] as string[],
+          formatter: `Tag: $content`,
+        },
+      ],
       hotKeys: [
         { key: '/', ctrl: true }, // Ctrl + / 快捷键触发搜索
         { key: 'k', ctrl: true }, // Ctrl + k 快捷键触发搜索
