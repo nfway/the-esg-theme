@@ -30,5 +30,6 @@ features:
   - title: 打包工具
     details: 推荐的打包工具是 Vite ，但也同样支持使用 Webpack 。选一个你喜欢的来使用吧！
 
-
+copyright: false
+footer: Since 2019,by Zhu Yuanzhi (aka Zhou Sanfeng),contact with help@ohesg.com. (CC BY-NC-ND 4.0)
 ---
