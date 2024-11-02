@@ -77,7 +77,6 @@ export default defineUserConfig({
       copyright:
         `Since 2019, contact with help@ohesg.com. (CC BY-NC-ND 4.0)`,
     },
-	 displayFooter: true,
 
     // 确保全局显示页脚
     displayFooter: true,
