@@ -110,7 +110,7 @@ export default defineUserConfig({
   plugins: [
     searchProPlugin({
       indexContent: true, // 启用全文索引
-      autoSuggestions: true, // 启用自动建议功能
+      autoSuggestions: false, // 启用自动建议功能
       customFields: [
         {
           getter: ({ frontmatter }): string[] => frontmatter["tag"] as string[],
