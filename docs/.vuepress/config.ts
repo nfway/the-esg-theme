@@ -65,7 +65,7 @@ export default defineUserConfig({
     editLink: false,
 
     // 启用最后更新时间并自定义格式
-    lastUpdatedText: '上次更新',
+    //lastUpdatedText: '上次更新',
 
     themePlugins: {
       git: isProd, // 启用 git 插件以获取最后更新时间
@@ -131,15 +131,7 @@ export default defineUserConfig({
           theme: 'dark-plus', 
         })] : []),
 
-    // 自定义最后更新时间格式插件配置
-    [
-      '@vuepress/plugin-git',
-      {
-        transformer(timestamp) {
-          const date = new Date(timestamp)
-          return `${date.getFullYear()}年${date.getMonth() + 1}月`
-        },
-      },
-    ],
+
+    
   ],
 })
