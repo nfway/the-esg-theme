@@ -64,11 +64,24 @@ export default defineUserConfig({
     // 禁用 "Edit this page on GitHub" 链接
     editLink: false,
 
-    // 启用最后更新时间并自定义格式
-    //lastUpdatedText: '上次更新',
+    // 禁用最后更新时间显示
+    lastUpdated: false,
+
+    // 禁用贡献者信息显示
+    contributors: false,
+
+    // 自定义页脚内容
+    footer: {
+      content:
+        `Since 2019, by <a href="https://3feng.im">Zhu Yuanzhi</a> (aka Zhou Sanfeng), contact with <a href="mailto:help@ohesg.com">help@ohesg.com</a>. (CC BY-NC-ND 4.0)`,
+      copyright: false, // 如果不需要额外的版权信息，可以设置为 false
+    },
+
+    // 确保全局显示页脚
+    displayFooter: true,
 
     themePlugins: {
-      git: isProd, // 启用 git 插件以获取最后更新时间
+      git: isProd, // 启用 git 插件以获取最后更新时间和贡献者信息
       prismjs: !isProd,
     },
   }),
@@ -130,8 +143,6 @@ export default defineUserConfig({
           langs: ['bash', 'diff', 'json', 'md', 'ts', 'vue'], 
           theme: 'dark-plus', 
         })] : []),
-
-
     
   ],
 })
