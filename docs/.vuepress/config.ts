@@ -70,11 +70,12 @@ export default defineUserConfig({
     // 禁用贡献者信息显示
     contributors: false,
 
-    // 自定义页脚内容
+    // 自定义页脚内容和版权信息
     footer: {
       content:
-        `Since 2019, by <a href="https://3feng.im">Zhu Yuanzhi</a> (aka Zhou Sanfeng), contact with <a href="mailto:help@ohesg.com">help@ohesg.com</a>. (CC BY-NC-ND 4.0)`,
-      copyright: false, // 如果不需要额外的版权信息，可以设置为 false
+        `Powered by <a href="https://3feng.im">Zhu Yuanzhi</a> (aka Zhou Sanfeng).`,
+      copyright:
+        `Since 2019, contact with help@ohesg.com. (CC BY-NC-ND 4.0)`,
     },
 
     // 确保全局显示页脚
